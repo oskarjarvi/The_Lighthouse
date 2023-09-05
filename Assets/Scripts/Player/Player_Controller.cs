@@ -21,16 +21,21 @@ public class Player_Controller : MonoBehaviour
     private void OnEnable()
     {
         input.PlayerInput.Enable();
+        input.PlayerInput.Interacting.Enable();
 
     }
     private void OnDisable()
     {
+
         input.PlayerInput.Disable();
+        input.PlayerInput.Interacting.Disable();
+
     }
     private void Update()
     {
         handleMovement();
-        
+        interact();
+        inspect();
     }
    
     void handleMovement()
@@ -47,12 +52,6 @@ public class Player_Controller : MonoBehaviour
         rb.position += Quaternion.Euler(0, cameraRot, 0) * movementDirection * moveSpeed * Time.deltaTime;
 
     }
-
-    private void FixedUpdate()
-    {
-        interact();
-        inspect();
-    }
     //interact with objects
     void interact()
     {
@@ -61,9 +60,12 @@ public class Player_Controller : MonoBehaviour
         RaycastHit hit;
 
         //check if it hit something within max distance (100)
-        if (input.PlayerInput.Interacting.triggered &&  Physics.Raycast(ray,out hit, 100))
+        if (Physics.Raycast(ray,out hit, 100))
         {
-            Debug.Log(hit.rigidbody);
+            if(input.PlayerInput.Interacting.triggered && hit.rigidbody != null)
+            {
+                Debug.Log("hello");
+            }
 
             //pick up object
 
