@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -7,15 +9,21 @@ public class Player_Controller : MonoBehaviour
 {
     public PlayerControls input;
     public Rigidbody rb;
+    public LayerMask interactableLayerMask;
+
 
     public float moveSpeed = 10f;
 
     Vector3 movementDirection;
 
+    private bool isHoldingItem;
+
+    private int heldItem;
+
     private void Awake()
     {
         input = new PlayerControls();
-
+        isHoldingItem = false;
     }
 
     private void OnEnable()
@@ -60,12 +68,25 @@ public class Player_Controller : MonoBehaviour
         RaycastHit hit;
 
         //check if it hit something within max distance (100)
-        if (Physics.Raycast(ray,out hit, 100))
+        if (Physics.Raycast(ray,out hit, 100, interactableLayerMask))
         {
-            if(input.PlayerInput.Interacting.triggered && hit.rigidbody != null)
+            if(hit.collider != null)
             {
-                Debug.Log("hello");
+                
+                if (input.PlayerInput.Interacting.triggered)
+                {
+                    isHoldingItem = true;
+                }
             }
+            else
+            {
+
+            }
+                
+                   
+                
+            
+            
 
             //pick up object
 
