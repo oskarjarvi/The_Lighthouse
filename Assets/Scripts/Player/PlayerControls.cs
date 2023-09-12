@@ -62,6 +62,15 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Lighting"",
+                    ""type"": ""Button"",
+                    ""id"": ""951d3a0c-7f4d-4d72-8277-1ad49f6da838"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -152,6 +161,17 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""action"": ""Inspecting"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""ca89c7f0-1efd-4104-8f3d-84bd7232a18c"",
+                    ""path"": ""<Keyboard>/l"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Lighting"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -164,6 +184,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         m_PlayerInput_Interacting = m_PlayerInput.FindAction("Interacting", throwIfNotFound: true);
         m_PlayerInput_Look = m_PlayerInput.FindAction("Look", throwIfNotFound: true);
         m_PlayerInput_Inspecting = m_PlayerInput.FindAction("Inspecting", throwIfNotFound: true);
+        m_PlayerInput_Lighting = m_PlayerInput.FindAction("Lighting", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -229,6 +250,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     private readonly InputAction m_PlayerInput_Interacting;
     private readonly InputAction m_PlayerInput_Look;
     private readonly InputAction m_PlayerInput_Inspecting;
+    private readonly InputAction m_PlayerInput_Lighting;
     public struct PlayerInputActions
     {
         private @PlayerControls m_Wrapper;
@@ -237,6 +259,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         public InputAction @Interacting => m_Wrapper.m_PlayerInput_Interacting;
         public InputAction @Look => m_Wrapper.m_PlayerInput_Look;
         public InputAction @Inspecting => m_Wrapper.m_PlayerInput_Inspecting;
+        public InputAction @Lighting => m_Wrapper.m_PlayerInput_Lighting;
         public InputActionMap Get() { return m_Wrapper.m_PlayerInput; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -258,6 +281,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @Inspecting.started += instance.OnInspecting;
             @Inspecting.performed += instance.OnInspecting;
             @Inspecting.canceled += instance.OnInspecting;
+            @Lighting.started += instance.OnLighting;
+            @Lighting.performed += instance.OnLighting;
+            @Lighting.canceled += instance.OnLighting;
         }
 
         private void UnregisterCallbacks(IPlayerInputActions instance)
@@ -274,6 +300,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @Inspecting.started -= instance.OnInspecting;
             @Inspecting.performed -= instance.OnInspecting;
             @Inspecting.canceled -= instance.OnInspecting;
+            @Lighting.started -= instance.OnLighting;
+            @Lighting.performed -= instance.OnLighting;
+            @Lighting.canceled -= instance.OnLighting;
         }
 
         public void RemoveCallbacks(IPlayerInputActions instance)
@@ -297,5 +326,6 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         void OnInteracting(InputAction.CallbackContext context);
         void OnLook(InputAction.CallbackContext context);
         void OnInspecting(InputAction.CallbackContext context);
+        void OnLighting(InputAction.CallbackContext context);
     }
 }
