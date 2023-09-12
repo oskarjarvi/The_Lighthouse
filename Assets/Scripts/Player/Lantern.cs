@@ -7,11 +7,15 @@ public class Lantern : MonoBehaviour
 {
 	public PlayerControls input;
 
-    public Light light;
+    public Light lanternLight;
 
 	private bool IsLightActive;
 
-	private void Awake()
+	public Transform lanternSlot;
+	public Transform inactiveLanternSlot;
+
+
+    private void Awake()
 	{
 		input = new PlayerControls(); 
 	}
@@ -27,14 +31,20 @@ public class Lantern : MonoBehaviour
     {
 		if (input.PlayerInput.Lighting.triggered)
 		{
-			if (!IsLightActive)
+            
+            if (!IsLightActive)
 			{
-				light.transform.position = new Vector3(-0.84f, 0, 1.17f);
-				light.intensity += 0.5f;
+
+                lanternLight.transform.SetParent(lanternSlot, false);
+
+                lanternLight.intensity += 0.5f;
 			}
 			else
 			{
-				light.intensity = 0.5f;
+
+                lanternLight.transform.SetParent(inactiveLanternSlot, false);
+
+                lanternLight.intensity = 0.5f;
 			}
 			IsLightActive = !IsLightActive;
 
