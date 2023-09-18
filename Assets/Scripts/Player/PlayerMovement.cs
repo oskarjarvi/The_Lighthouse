@@ -20,6 +20,8 @@ public class PlayerMovement : MonoBehaviour
         movementDirection = new(moveInput.x, 0, moveInput.y);
         float cameraRot = Camera.main.transform.rotation.eulerAngles.y;
 
-        player.rb.position += Quaternion.Euler(0, cameraRot, 0) * movementDirection * movementSpeed * Time.deltaTime;
+        Vector3 targetDirection = Quaternion.Euler(0, cameraRot, 0) * movementDirection * movementSpeed * Time.deltaTime;
+
+        player.ctlr.Move(targetDirection);
     }
 }

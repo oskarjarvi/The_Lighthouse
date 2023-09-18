@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Item : MonoBehaviour
 {
-    public Transform prefab;
+    //public Transform prefab;
     public bool isPickedUp { get; set; }
     
     public Rigidbody rb;
@@ -13,6 +13,13 @@ public class Item : MonoBehaviour
     {
         isPickedUp = false;
     }
+    private void Update()
+    {
+        if (isPickedUp)
+        {
+            rb.isKinematic = true;
+        }
+    }
 
-    
+
 }
