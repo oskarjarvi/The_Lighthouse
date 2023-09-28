@@ -5,6 +5,6 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     public Item heldItem;
-    public CharacterController ctlr;
+    public Rigidbody rb;
     
 }
