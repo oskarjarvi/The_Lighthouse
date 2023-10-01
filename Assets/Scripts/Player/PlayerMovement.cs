@@ -32,7 +32,7 @@ public class PlayerMovement : MonoBehaviour
         }
        
     }
-    public void move(Vector2 moveInput)
+    public void Move(Vector2 moveInput)
     {
         movementDirection = new(moveInput.x, _velocity, moveInput.y);
         float cameraRot = Camera.main.transform.rotation.eulerAngles.y;

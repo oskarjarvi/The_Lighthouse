@@ -21,7 +21,7 @@ public class PlayerInteractions : MonoBehaviour
 
     }
 
-    public void interact()
+    public void Interact()
     {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
@@ -62,7 +62,7 @@ public class PlayerInteractions : MonoBehaviour
         }
         return;
     }
-    public void inspect()
+    public void Inspect()
     {
         
     }

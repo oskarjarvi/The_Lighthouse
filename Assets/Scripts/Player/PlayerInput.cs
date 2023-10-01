@@ -1,85 +1,70 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.InputSystem;
+
 public class PlayerInput : MonoBehaviour
 {
-    public PlayerControls input;
-    
+    private PlayerControls playerControls;
     private PlayerMovement playerMovement;
     private PlayerInteractions playerInteractions;
 
-
     private void Awake()
     {
-       
+        playerControls = new PlayerControls();
         playerMovement = GetComponent<PlayerMovement>();
         playerInteractions = GetComponent<PlayerInteractions>();
-        input = new PlayerControls();
     }
 
     private void OnEnable()
     {
-
-
-        input.PlayerInput.Enable();
-        input.PlayerInput.Interacting.Enable();
-        input.PlayerInput.Drop.Enable();
-
+        playerControls.PlayerInput.Enable();
+        playerControls.PlayerInput.Interacting.Enable();
+        playerControls.PlayerInput.Drop.Enable();
     }
+
     private void OnDisable()
     {
-
-        input.PlayerInput.Disable();
-        input.PlayerInput.Interacting.Disable();
-        input.PlayerInput.Drop.Disable();
-
-
+        playerControls.PlayerInput.Disable();
+        playerControls.PlayerInput.Interacting.Disable();
+        playerControls.PlayerInput.Drop.Disable();
     }
+
     private void Update()
     {
-        handleMovement();
-        interact();
-        inspect();
-        dropItem();
+        HandleMovement();
+        HandleInteract();
+        HandleInspect();
+        HandleDropItem();
     }
-   
-    void handleMovement()
+
+    private void HandleMovement()
     {
-        //Read the input coming from unity, its listening for the WASD as specified in the input map. This is only in X and Y axis since its a Vector2(e.g 2d)
-        Vector2 playerInput = input.PlayerInput.Walking.ReadValue<Vector2>();
-
-        //Let the playerMovement script handle the rest
-        playerMovement.move(playerInput);
-
+        Vector2 playerInput = playerControls.PlayerInput.Walking.ReadValue<Vector2>();
+        playerMovement.Move(playerInput);
     }
-    //interact with objects
-    void interact()
+
+    private void HandleInteract()
     {
-        if (input.PlayerInput.Interacting.triggered)
+        if (playerControls.PlayerInput.Interacting.triggered)
         {
-            playerInteractions.interact();
-        }
-           
-    }
-    void inspect()
-    {
-        if(input.PlayerInput.Inspecting.triggered)
-        {
-
-            playerInteractions.inspect();
-
+            playerInteractions.Interact();
         }
     }
-    void dropItem()
+
+    private void HandleInspect()
     {
-        if (input.PlayerInput.Drop.triggered)
+        if (playerControls.PlayerInput.Inspecting.triggered)
+        {
+            playerInteractions.Inspect();
+        }
+    }
+
+    private void HandleDropItem()
+    {
+        if (playerControls.PlayerInput.Drop.triggered)
         {
             playerInteractions.DropItem();
         }
     }
-
-
 }
