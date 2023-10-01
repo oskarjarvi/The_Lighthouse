@@ -9,7 +9,7 @@
                     "name": "Walking",
                     "type": "Value",
                     "id": "e165acff-2c9a-4b69-81ab-b27e1304cb44",
-                    "expectedControlType": "",
+                    "expectedControlType": "Vector2",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
@@ -20,7 +20,7 @@
                     "id": "c46ffdd3-c975-4d35-8e77-ac7623250a5e",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": "Tap",
+                    "interactions": "",
                     "initialStateCheck": false
                 },
                 {
@@ -48,6 +48,15 @@
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Drop",
+                    "type": "Button",
+                    "id": "da2b7f10-87c6-483c-914b-4f81f4a7be01",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "Tap",
                     "initialStateCheck": false
                 }
             ],
@@ -148,6 +157,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "Lighting",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "20eca654-1ce4-4888-b63c-2fc26a364837",
+                    "path": "<Keyboard>/g",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Drop",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

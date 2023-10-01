@@ -10,15 +10,17 @@ public class PlayerInteractions : MonoBehaviour
     Player player;
     public Transform pickUpParent;
 
+    private Collider playerCollider;
+
     public event EventHandler<Item> OnItemSelected;
 
     private void Awake()
     {
         player = GetComponent<Player>();
+        playerCollider = player.ctrl.gameObject.GetComponent<Collider>();
 
     }
-    // Update is called once per frame
-  
+
     public void interact()
     {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -35,12 +37,20 @@ public class PlayerInteractions : MonoBehaviour
                 player.heldItem = item;
                 item.isPickedUp = true;
 
-                item.transform.position = Vector3.zero;
-                item.transform.rotation = Quaternion.identity;
+                item.transform.localPosition = Vector3.zero;
+                item.transform.localRotation = Quaternion.identity;
 
                 item.transform.SetParent(pickUpParent, false);
 
                 item.rb.isKinematic = true;
+
+                Debug.Log(item.rb.isKinematic);
+                if (playerCollider != null)
+                {
+                    Physics.IgnoreCollision(playerCollider, item.GetComponent<Collider>(), true);
+
+                }
+
             }
             else if(player.heldItem != null)
             {
@@ -55,5 +65,24 @@ public class PlayerInteractions : MonoBehaviour
     public void inspect()
     {
         
+    }
+    public void DropItem()
+    {
+        if (player.heldItem != null)
+        {
+            player.heldItem.transform.SetParent(null);
+
+            player.heldItem.rb.isKinematic = false;
+            player.heldItem.rb.useGravity = true;
+
+
+            if (playerCollider != null)
+            {
+                Physics.IgnoreCollision(playerCollider, player.heldItem.GetComponent<Collider>(), false);
+
+            }
+
+            player.heldItem = null;
+        }
     }
 }

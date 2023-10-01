@@ -16,38 +16,39 @@ public class Lantern : MonoBehaviour
 
 
     private void Awake()
+    {
+        input = new PlayerControls();
+
+        input.PlayerInput.Lighting.performed += ctx => HandleLantern();
+    }
+
+    private void OnEnable()
 	{
-		input = new PlayerControls(); 
-	}
-	private void OnEnable()
-	{
-		input.PlayerInput.Lighting.Enable();
+		input.PlayerInput.Enable();
 	}
 	private void OnDisable()
 	{
-		input.PlayerInput.Lighting.Disable();
+		input.PlayerInput.Disable();
 	}
-	void Update()
-    {
-		if (input.PlayerInput.Lighting.triggered)
-		{
-            
+	private void HandleLantern()
+	{
+
             if (!IsLightActive)
-			{
+            {
 
                 lanternLight.transform.SetParent(lanternSlot, false);
 
                 lanternLight.intensity += 0.5f;
-			}
-			else
-			{
+            }
+            else
+            {
 
                 lanternLight.transform.SetParent(inactiveLanternSlot, false);
 
                 lanternLight.intensity = 0.5f;
-			}
-			IsLightActive = !IsLightActive;
-
-		}
+            }
+            IsLightActive = !IsLightActive;
+        
     }
+
 }

@@ -3458,8 +3458,8 @@ GameObject:
   - component: {fileID: 1176739899}
   - component: {fileID: 1176739898}
   - component: {fileID: 1176739897}
-  - component: {fileID: 1176739901}
   - component: {fileID: 1176739902}
+  - component: {fileID: 1176739903}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -3541,21 +3541,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   heldItem: {fileID: 0}
   ctrl: {fileID: 1176739902}
---- !u!114 &1176739901
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1176739887}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6aff8a6dfb6db8f448031a0130a0ce75, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  lanternLight: {fileID: 886490653}
-  lanternSlot: {fileID: 1059823831}
-  inactiveLanternSlot: {fileID: 302802921}
 --- !u!143 &1176739902
 CharacterController:
   m_ObjectHideFlags: 0
@@ -3574,6 +3559,21 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1176739903
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1176739887}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6aff8a6dfb6db8f448031a0130a0ce75, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lanternLight: {fileID: 886490653}
+  lanternSlot: {fileID: 1059823831}
+  inactiveLanternSlot: {fileID: 302802921}
 --- !u!1001 &1220130372
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6478,7 +6478,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 919132148063798657}
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 36.80652, y: 17.217003, z: 114.475006}
+  m_LocalPosition: {x: 20.88, y: 20.26, z: 124.23}
   m_LocalScale: {x: 0.06766345, y: 0.06766345, z: 0.06766345}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -6494,7 +6494,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 919132149173256139}
   m_LocalRotation: {x: -0.02979596, y: -0.9992368, z: -0.00075281644, w: -0.025245711}
-  m_LocalPosition: {x: 36.635876, y: 17.144695, z: 114.441}
+  m_LocalPosition: {x: 36.177357, y: 28.557692, z: 137.145}
   m_LocalScale: {x: 0.13584675, y: 0.13584675, z: 0.13584675}
   m_ConstrainProportionsScale: 0
   m_Children:

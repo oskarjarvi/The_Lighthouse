@@ -26,6 +26,7 @@ public class PlayerInput : MonoBehaviour
 
         input.PlayerInput.Enable();
         input.PlayerInput.Interacting.Enable();
+        input.PlayerInput.Drop.Enable();
 
     }
     private void OnDisable()
@@ -33,6 +34,8 @@ public class PlayerInput : MonoBehaviour
 
         input.PlayerInput.Disable();
         input.PlayerInput.Interacting.Disable();
+        input.PlayerInput.Drop.Disable();
+
 
     }
     private void Update()
@@ -40,6 +43,7 @@ public class PlayerInput : MonoBehaviour
         handleMovement();
         interact();
         inspect();
+        dropItem();
     }
    
     void handleMovement()
@@ -69,6 +73,13 @@ public class PlayerInput : MonoBehaviour
 
         }
     }
-    
+    void dropItem()
+    {
+        if (input.PlayerInput.Drop.triggered)
+        {
+            playerInteractions.DropItem();
+        }
+    }
+
 
 }

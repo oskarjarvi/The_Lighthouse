@@ -13,13 +13,7 @@ public class Item : MonoBehaviour
     {
         isPickedUp = false;
     }
-    private void Update()
-    {
-        if (isPickedUp)
-        {
-            rb.isKinematic = true;
-        }
-    }
+
 
 
 }

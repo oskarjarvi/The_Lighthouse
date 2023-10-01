@@ -31,7 +31,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""name"": ""Walking"",
                     ""type"": ""Value"",
                     ""id"": ""e165acff-2c9a-4b69-81ab-b27e1304cb44"",
-                    ""expectedControlType"": """",
+                    ""expectedControlType"": ""Vector2"",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
@@ -42,7 +42,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""id"": ""c46ffdd3-c975-4d35-8e77-ac7623250a5e"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
-                    ""interactions"": ""Tap"",
+                    ""interactions"": """",
                     ""initialStateCheck"": false
                 },
                 {
@@ -70,6 +70,15 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Drop"",
+                    ""type"": ""Button"",
+                    ""id"": ""da2b7f10-87c6-483c-914b-4f81f4a7be01"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": ""Tap"",
                     ""initialStateCheck"": false
                 }
             ],
@@ -172,6 +181,17 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""action"": ""Lighting"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""20eca654-1ce4-4888-b63c-2fc26a364837"",
+                    ""path"": ""<Keyboard>/g"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Drop"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -185,6 +205,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         m_PlayerInput_Look = m_PlayerInput.FindAction("Look", throwIfNotFound: true);
         m_PlayerInput_Inspecting = m_PlayerInput.FindAction("Inspecting", throwIfNotFound: true);
         m_PlayerInput_Lighting = m_PlayerInput.FindAction("Lighting", throwIfNotFound: true);
+        m_PlayerInput_Drop = m_PlayerInput.FindAction("Drop", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -251,6 +272,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     private readonly InputAction m_PlayerInput_Look;
     private readonly InputAction m_PlayerInput_Inspecting;
     private readonly InputAction m_PlayerInput_Lighting;
+    private readonly InputAction m_PlayerInput_Drop;
     public struct PlayerInputActions
     {
         private @PlayerControls m_Wrapper;
@@ -260,6 +282,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         public InputAction @Look => m_Wrapper.m_PlayerInput_Look;
         public InputAction @Inspecting => m_Wrapper.m_PlayerInput_Inspecting;
         public InputAction @Lighting => m_Wrapper.m_PlayerInput_Lighting;
+        public InputAction @Drop => m_Wrapper.m_PlayerInput_Drop;
         public InputActionMap Get() { return m_Wrapper.m_PlayerInput; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -284,6 +307,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @Lighting.started += instance.OnLighting;
             @Lighting.performed += instance.OnLighting;
             @Lighting.canceled += instance.OnLighting;
+            @Drop.started += instance.OnDrop;
+            @Drop.performed += instance.OnDrop;
+            @Drop.canceled += instance.OnDrop;
         }
 
         private void UnregisterCallbacks(IPlayerInputActions instance)
@@ -303,6 +329,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @Lighting.started -= instance.OnLighting;
             @Lighting.performed -= instance.OnLighting;
             @Lighting.canceled -= instance.OnLighting;
+            @Drop.started -= instance.OnDrop;
+            @Drop.performed -= instance.OnDrop;
+            @Drop.canceled -= instance.OnDrop;
         }
 
         public void RemoveCallbacks(IPlayerInputActions instance)
@@ -327,5 +356,6 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         void OnLook(InputAction.CallbackContext context);
         void OnInspecting(InputAction.CallbackContext context);
         void OnLighting(InputAction.CallbackContext context);
+        void OnDrop(InputAction.CallbackContext context);
     }
 }
