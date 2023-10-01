@@ -28,7 +28,7 @@ public class PlayerInteractions : MonoBehaviour
         if (Physics.Raycast(ray, out hit, 100, interactableLayerMask))
         {
             //If you hit an object in the interactable layer, check if it has a collider
-            if (hit.collider != null)
+            if (hit.collider != null && player.heldItem == null)
             {
                 var item = hit.collider.GetComponent<Item>();
 
@@ -42,6 +42,12 @@ public class PlayerInteractions : MonoBehaviour
 
                 item.rb.isKinematic = true;
             }
+            else if(player.heldItem != null)
+            {
+                Debug.Log("You already have an item");
+                return;
+            }
+            return;
 
         }
         return;
