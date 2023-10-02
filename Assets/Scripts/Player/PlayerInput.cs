@@ -34,7 +34,6 @@ public class PlayerInput : MonoBehaviour
     {
         HandleMovement();
         HandleInteract();
-        HandleInspect();
         HandleDropItem();
     }
 
@@ -52,13 +51,7 @@ public class PlayerInput : MonoBehaviour
         }
     }
 
-    private void HandleInspect()
-    {
-        if (playerControls.PlayerInput.Inspecting.triggered)
-        {
-            playerInteractions.Inspect();
-        }
-    }
+    
 
     private void HandleDropItem()
     {

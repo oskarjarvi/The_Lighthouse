@@ -9,10 +9,13 @@ public class PlayerInteractions : MonoBehaviour
     public LayerMask interactableLayerMask;
     Player player;
     public Transform pickUpParent;
+    public Canvas inspectCanva;
 
     private Collider playerCollider;
 
-    public event EventHandler<Item> OnItemSelected;
+    private Transform selectedPrefab;
+
+    
 
     private void Awake()
     {
@@ -34,22 +37,30 @@ public class PlayerInteractions : MonoBehaviour
             {
                 var item = hit.collider.GetComponent<Item>();
 
-                player.heldItem = item;
-                item.isPickedUp = true;
-
-                item.transform.localPosition = Vector3.zero;
-                item.transform.localRotation = Quaternion.identity;
-
-                item.transform.SetParent(pickUpParent, false);
-
-                item.rb.isKinematic = true;
-
-                Debug.Log(item.rb.isKinematic);
-                if (playerCollider != null)
+                if(item.isInspectable)
                 {
-                    Physics.IgnoreCollision(playerCollider, item.GetComponent<Collider>(), true);
-
+                    Inspect(item);
                 }
+                else
+                {
+                    player.heldItem = item;
+                    item.isPickedUp = true;
+
+                    item.transform.localPosition = Vector3.zero;
+                    item.transform.localRotation = Quaternion.identity;
+
+                    item.transform.SetParent(pickUpParent, false);
+
+                    item.rb.isKinematic = true;
+
+                    Debug.Log(item.rb.isKinematic);
+                    if (playerCollider != null)
+                    {
+                        Physics.IgnoreCollision(playerCollider, item.GetComponent<Collider>(), true);
+
+                    }
+                }
+                
 
             }
             else if(player.heldItem != null)
@@ -62,10 +73,21 @@ public class PlayerInteractions : MonoBehaviour
         }
         return;
     }
-    public void Inspect()
+    public void Inspect(Item item)
     {
+        item.rb.useGravity = false;
+        inspectCanva.gameObject.SetActive(true);
         
+        if (selectedPrefab != null)
+        {
+            Destroy(selectedPrefab.gameObject);
+        }
+
+        selectedPrefab = Instantiate(item.prefab, inspectCanva.transform);
+        selectedPrefab.localPosition = Vector3.zero;
+        selectedPrefab.localRotation = Quaternion.identity;
     }
+
     public void DropItem()
     {
         if (player.heldItem != null)
