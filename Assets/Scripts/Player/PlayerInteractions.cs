@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 
@@ -76,14 +77,14 @@ public class PlayerInteractions : MonoBehaviour
     public void Inspect(Item item)
     {
         item.rb.useGravity = false;
-        inspectCanva.gameObject.SetActive(true);
+        //inspectCanva.gameObject.SetActive(true);
         
         if (selectedPrefab != null)
         {
             Destroy(selectedPrefab.gameObject);
         }
-
-        selectedPrefab = Instantiate(item.prefab, inspectCanva.transform);
+        item.gameObject.layer = LayerMask.NameToLayer("ExaminedItem");
+        selectedPrefab = Instantiate(item.prefab, Camera.main.transform.position + Camera.main.transform.forward * 10f, Quaternion.identity);
         selectedPrefab.localPosition = Vector3.zero;
         selectedPrefab.localRotation = Quaternion.identity;
     }
