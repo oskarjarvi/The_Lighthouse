@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.InputSystem.HID;
 
 
 public class PlayerInteractions : MonoBehaviour
@@ -10,13 +11,14 @@ public class PlayerInteractions : MonoBehaviour
     public LayerMask interactableLayerMask;
     Player player;
     public Transform pickUpParent;
-    public Canvas inspectCanva;
+    public Camera inspectCamera;
 
     private Collider playerCollider;
 
     private Transform selectedPrefab;
 
-    
+
+
 
     private void Awake()
     {
@@ -38,7 +40,7 @@ public class PlayerInteractions : MonoBehaviour
             {
                 var item = hit.collider.GetComponent<Item>();
 
-                if(item.isInspectable)
+                if (item.isInspectable)
                 {
                     Inspect(item);
                 }
@@ -61,10 +63,10 @@ public class PlayerInteractions : MonoBehaviour
 
                     }
                 }
-                
+
 
             }
-            else if(player.heldItem != null)
+            else if (player.heldItem != null)
             {
                 Debug.Log("You already have an item");
                 return;
@@ -77,16 +79,27 @@ public class PlayerInteractions : MonoBehaviour
     public void Inspect(Item item)
     {
         item.rb.useGravity = false;
-        //inspectCanva.gameObject.SetActive(true);
-        
+        //inspectCamera.
+
+
         if (selectedPrefab != null)
         {
             Destroy(selectedPrefab.gameObject);
         }
-        item.gameObject.layer = LayerMask.NameToLayer("ExaminedItem");
-        selectedPrefab = Instantiate(item.prefab, Camera.main.transform.position + Camera.main.transform.forward * 10f, Quaternion.identity);
-        selectedPrefab.localPosition = Vector3.zero;
-        selectedPrefab.localRotation = Quaternion.identity;
+
+        
+
+
+        selectedPrefab = Instantiate(item.prefab,inspectCamera.transform.position + inspectCamera.transform.forward *2f, Quaternion.identity);
+        selectedPrefab.gameObject.layer = LayerMask.NameToLayer("ExaminedItem");
+
+        foreach (Transform child in selectedPrefab.gameObject.transform)
+        {
+            child.gameObject.layer = LayerMask.NameToLayer("ExaminedItem");
+        }
+
+        //selectedPrefab.localPosition = Vector3.zero;
+        //selectedPrefab.localRotation = Quaternion.identity;
     }
 
     public void DropItem()
