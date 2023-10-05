@@ -5,7 +5,6 @@ using UnityEngine.InputSystem;
 
 public class Lantern : MonoBehaviour
 {
-	public PlayerControls input;
 
     public Light lanternLight;
 
@@ -15,24 +14,10 @@ public class Lantern : MonoBehaviour
 	public Transform inactiveLanternSlot;
 
 
-    private void Awake()
-    {
-        input = new PlayerControls();
-
-        input.PlayerInput.Lighting.performed += ctx => HandleLantern();
-    }
-
-    private void OnEnable()
+	public void HandleLantern()
 	{
-		input.PlayerInput.Enable();
-	}
-	private void OnDisable()
-	{
-		input.PlayerInput.Disable();
-	}
-	private void HandleLantern()
-	{
-
+        if(lanternLight != null)
+        {
             if (!IsLightActive)
             {
 
@@ -48,7 +33,9 @@ public class Lantern : MonoBehaviour
                 lanternLight.intensity = 0.5f;
             }
             IsLightActive = !IsLightActive;
-        
+
+        }
+
     }
 
 }

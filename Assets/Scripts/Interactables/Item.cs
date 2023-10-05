@@ -8,13 +8,21 @@ public class Item : MonoBehaviour
     public bool isPickedUp { get; set; }
     [SerializeField]
     public bool isInspectable;
-    
+
     public Rigidbody rb;
+    public Collider itemCollider;
+
+
     // Start is called before the first frame update
-    void Start()
+
+    private void Awake()
     {
         isPickedUp = false;
+      
+
     }
+    
+
 
 
 

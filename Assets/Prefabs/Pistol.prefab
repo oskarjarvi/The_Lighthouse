@@ -146,7 +146,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 036832484fb42d348b40e0bbe61baf19, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prefab: {fileID: 0}
+  prefab: {fileID: 4231555480238162971}
   isInspectable: 1
   rb: {fileID: 9004917238416879798}
 --- !u!64 &9004917238416879793

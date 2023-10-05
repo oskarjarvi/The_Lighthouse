@@ -2,7 +2,7 @@
     "name": "PlayerControls",
     "maps": [
         {
-            "name": "PlayerInput",
+            "name": "PlayerMovement",
             "id": "0b95330f-cd5a-4008-a0d3-a3e227cedbbd",
             "actions": [
                 {
@@ -31,15 +31,6 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
-                },
-                {
-                    "name": "Inspecting",
-                    "type": "Button",
-                    "id": "3df96483-59b6-4ad6-863f-cb18dc2a1f7d",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
                 },
                 {
                     "name": "Lighting",
@@ -140,17 +131,6 @@
                 },
                 {
                     "name": "",
-                    "id": "d9b1e685-7025-488e-adcd-9270d491f957",
-                    "path": "<Keyboard>/i",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Inspecting",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "ca89c7f0-1efd-4104-8f3d-84bd7232a18c",
                     "path": "<Keyboard>/l",
                     "interactions": "",
@@ -168,6 +148,45 @@
                     "processors": "",
                     "groups": "",
                     "action": "Drop",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        },
+        {
+            "name": "PlayerInspect",
+            "id": "dcce1872-72cc-4f0a-a4f4-c32c775518d8",
+            "actions": [
+                {
+                    "name": "Inspecting",
+                    "type": "Value",
+                    "id": "2d8f6530-55b1-41de-9984-5e35b63652b2",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "0bfb750c-967e-4a90-a920-8eed7b16c250",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Inspecting",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "284011a6-74ea-4187-acde-4227ce5b277d",
+                    "path": "",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Inspecting",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

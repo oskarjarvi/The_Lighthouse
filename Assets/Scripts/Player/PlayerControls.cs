@@ -24,7 +24,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     ""name"": ""PlayerControls"",
     ""maps"": [
         {
-            ""name"": ""PlayerInput"",
+            ""name"": ""PlayerMovement"",
             ""id"": ""0b95330f-cd5a-4008-a0d3-a3e227cedbbd"",
             ""actions"": [
                 {
@@ -53,15 +53,6 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
-                },
-                {
-                    ""name"": ""Inspecting"",
-                    ""type"": ""Button"",
-                    ""id"": ""3df96483-59b6-4ad6-863f-cb18dc2a1f7d"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
                 },
                 {
                     ""name"": ""Lighting"",
@@ -162,17 +153,6 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""d9b1e685-7025-488e-adcd-9270d491f957"",
-                    ""path"": ""<Keyboard>/i"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Inspecting"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""ca89c7f0-1efd-4104-8f3d-84bd7232a18c"",
                     ""path"": ""<Keyboard>/l"",
                     ""interactions"": """",
@@ -194,18 +174,59 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""PlayerInspect"",
+            ""id"": ""dcce1872-72cc-4f0a-a4f4-c32c775518d8"",
+            ""actions"": [
+                {
+                    ""name"": ""Inspecting"",
+                    ""type"": ""Value"",
+                    ""id"": ""2d8f6530-55b1-41de-9984-5e35b63652b2"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""0bfb750c-967e-4a90-a920-8eed7b16c250"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Inspecting"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""284011a6-74ea-4187-acde-4227ce5b277d"",
+                    ""path"": """",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Inspecting"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": []
 }");
-        // PlayerInput
-        m_PlayerInput = asset.FindActionMap("PlayerInput", throwIfNotFound: true);
-        m_PlayerInput_Walking = m_PlayerInput.FindAction("Walking", throwIfNotFound: true);
-        m_PlayerInput_Interacting = m_PlayerInput.FindAction("Interacting", throwIfNotFound: true);
-        m_PlayerInput_Look = m_PlayerInput.FindAction("Look", throwIfNotFound: true);
-        m_PlayerInput_Inspecting = m_PlayerInput.FindAction("Inspecting", throwIfNotFound: true);
-        m_PlayerInput_Lighting = m_PlayerInput.FindAction("Lighting", throwIfNotFound: true);
-        m_PlayerInput_Drop = m_PlayerInput.FindAction("Drop", throwIfNotFound: true);
+        // PlayerMovement
+        m_PlayerMovement = asset.FindActionMap("PlayerMovement", throwIfNotFound: true);
+        m_PlayerMovement_Walking = m_PlayerMovement.FindAction("Walking", throwIfNotFound: true);
+        m_PlayerMovement_Interacting = m_PlayerMovement.FindAction("Interacting", throwIfNotFound: true);
+        m_PlayerMovement_Look = m_PlayerMovement.FindAction("Look", throwIfNotFound: true);
+        m_PlayerMovement_Lighting = m_PlayerMovement.FindAction("Lighting", throwIfNotFound: true);
+        m_PlayerMovement_Drop = m_PlayerMovement.FindAction("Drop", throwIfNotFound: true);
+        // PlayerInspect
+        m_PlayerInspect = asset.FindActionMap("PlayerInspect", throwIfNotFound: true);
+        m_PlayerInspect_Inspecting = m_PlayerInspect.FindAction("Inspecting", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -264,34 +285,32 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         return asset.FindBinding(bindingMask, out action);
     }
 
-    // PlayerInput
-    private readonly InputActionMap m_PlayerInput;
-    private List<IPlayerInputActions> m_PlayerInputActionsCallbackInterfaces = new List<IPlayerInputActions>();
-    private readonly InputAction m_PlayerInput_Walking;
-    private readonly InputAction m_PlayerInput_Interacting;
-    private readonly InputAction m_PlayerInput_Look;
-    private readonly InputAction m_PlayerInput_Inspecting;
-    private readonly InputAction m_PlayerInput_Lighting;
-    private readonly InputAction m_PlayerInput_Drop;
-    public struct PlayerInputActions
+    // PlayerMovement
+    private readonly InputActionMap m_PlayerMovement;
+    private List<IPlayerMovementActions> m_PlayerMovementActionsCallbackInterfaces = new List<IPlayerMovementActions>();
+    private readonly InputAction m_PlayerMovement_Walking;
+    private readonly InputAction m_PlayerMovement_Interacting;
+    private readonly InputAction m_PlayerMovement_Look;
+    private readonly InputAction m_PlayerMovement_Lighting;
+    private readonly InputAction m_PlayerMovement_Drop;
+    public struct PlayerMovementActions
     {
         private @PlayerControls m_Wrapper;
-        public PlayerInputActions(@PlayerControls wrapper) { m_Wrapper = wrapper; }
-        public InputAction @Walking => m_Wrapper.m_PlayerInput_Walking;
-        public InputAction @Interacting => m_Wrapper.m_PlayerInput_Interacting;
-        public InputAction @Look => m_Wrapper.m_PlayerInput_Look;
-        public InputAction @Inspecting => m_Wrapper.m_PlayerInput_Inspecting;
-        public InputAction @Lighting => m_Wrapper.m_PlayerInput_Lighting;
-        public InputAction @Drop => m_Wrapper.m_PlayerInput_Drop;
-        public InputActionMap Get() { return m_Wrapper.m_PlayerInput; }
+        public PlayerMovementActions(@PlayerControls wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Walking => m_Wrapper.m_PlayerMovement_Walking;
+        public InputAction @Interacting => m_Wrapper.m_PlayerMovement_Interacting;
+        public InputAction @Look => m_Wrapper.m_PlayerMovement_Look;
+        public InputAction @Lighting => m_Wrapper.m_PlayerMovement_Lighting;
+        public InputAction @Drop => m_Wrapper.m_PlayerMovement_Drop;
+        public InputActionMap Get() { return m_Wrapper.m_PlayerMovement; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
         public bool enabled => Get().enabled;
-        public static implicit operator InputActionMap(PlayerInputActions set) { return set.Get(); }
-        public void AddCallbacks(IPlayerInputActions instance)
+        public static implicit operator InputActionMap(PlayerMovementActions set) { return set.Get(); }
+        public void AddCallbacks(IPlayerMovementActions instance)
         {
-            if (instance == null || m_Wrapper.m_PlayerInputActionsCallbackInterfaces.Contains(instance)) return;
-            m_Wrapper.m_PlayerInputActionsCallbackInterfaces.Add(instance);
+            if (instance == null || m_Wrapper.m_PlayerMovementActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_PlayerMovementActionsCallbackInterfaces.Add(instance);
             @Walking.started += instance.OnWalking;
             @Walking.performed += instance.OnWalking;
             @Walking.canceled += instance.OnWalking;
@@ -301,9 +320,6 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @Look.started += instance.OnLook;
             @Look.performed += instance.OnLook;
             @Look.canceled += instance.OnLook;
-            @Inspecting.started += instance.OnInspecting;
-            @Inspecting.performed += instance.OnInspecting;
-            @Inspecting.canceled += instance.OnInspecting;
             @Lighting.started += instance.OnLighting;
             @Lighting.performed += instance.OnLighting;
             @Lighting.canceled += instance.OnLighting;
@@ -312,7 +328,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @Drop.canceled += instance.OnDrop;
         }
 
-        private void UnregisterCallbacks(IPlayerInputActions instance)
+        private void UnregisterCallbacks(IPlayerMovementActions instance)
         {
             @Walking.started -= instance.OnWalking;
             @Walking.performed -= instance.OnWalking;
@@ -323,9 +339,6 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @Look.started -= instance.OnLook;
             @Look.performed -= instance.OnLook;
             @Look.canceled -= instance.OnLook;
-            @Inspecting.started -= instance.OnInspecting;
-            @Inspecting.performed -= instance.OnInspecting;
-            @Inspecting.canceled -= instance.OnInspecting;
             @Lighting.started -= instance.OnLighting;
             @Lighting.performed -= instance.OnLighting;
             @Lighting.canceled -= instance.OnLighting;
@@ -334,28 +347,77 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @Drop.canceled -= instance.OnDrop;
         }
 
-        public void RemoveCallbacks(IPlayerInputActions instance)
+        public void RemoveCallbacks(IPlayerMovementActions instance)
         {
-            if (m_Wrapper.m_PlayerInputActionsCallbackInterfaces.Remove(instance))
+            if (m_Wrapper.m_PlayerMovementActionsCallbackInterfaces.Remove(instance))
                 UnregisterCallbacks(instance);
         }
 
-        public void SetCallbacks(IPlayerInputActions instance)
+        public void SetCallbacks(IPlayerMovementActions instance)
         {
-            foreach (var item in m_Wrapper.m_PlayerInputActionsCallbackInterfaces)
+            foreach (var item in m_Wrapper.m_PlayerMovementActionsCallbackInterfaces)
                 UnregisterCallbacks(item);
-            m_Wrapper.m_PlayerInputActionsCallbackInterfaces.Clear();
+            m_Wrapper.m_PlayerMovementActionsCallbackInterfaces.Clear();
             AddCallbacks(instance);
         }
     }
-    public PlayerInputActions @PlayerInput => new PlayerInputActions(this);
-    public interface IPlayerInputActions
+    public PlayerMovementActions @PlayerMovement => new PlayerMovementActions(this);
+
+    // PlayerInspect
+    private readonly InputActionMap m_PlayerInspect;
+    private List<IPlayerInspectActions> m_PlayerInspectActionsCallbackInterfaces = new List<IPlayerInspectActions>();
+    private readonly InputAction m_PlayerInspect_Inspecting;
+    public struct PlayerInspectActions
+    {
+        private @PlayerControls m_Wrapper;
+        public PlayerInspectActions(@PlayerControls wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Inspecting => m_Wrapper.m_PlayerInspect_Inspecting;
+        public InputActionMap Get() { return m_Wrapper.m_PlayerInspect; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(PlayerInspectActions set) { return set.Get(); }
+        public void AddCallbacks(IPlayerInspectActions instance)
+        {
+            if (instance == null || m_Wrapper.m_PlayerInspectActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_PlayerInspectActionsCallbackInterfaces.Add(instance);
+            @Inspecting.started += instance.OnInspecting;
+            @Inspecting.performed += instance.OnInspecting;
+            @Inspecting.canceled += instance.OnInspecting;
+        }
+
+        private void UnregisterCallbacks(IPlayerInspectActions instance)
+        {
+            @Inspecting.started -= instance.OnInspecting;
+            @Inspecting.performed -= instance.OnInspecting;
+            @Inspecting.canceled -= instance.OnInspecting;
+        }
+
+        public void RemoveCallbacks(IPlayerInspectActions instance)
+        {
+            if (m_Wrapper.m_PlayerInspectActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        public void SetCallbacks(IPlayerInspectActions instance)
+        {
+            foreach (var item in m_Wrapper.m_PlayerInspectActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_PlayerInspectActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    public PlayerInspectActions @PlayerInspect => new PlayerInspectActions(this);
+    public interface IPlayerMovementActions
     {
         void OnWalking(InputAction.CallbackContext context);
         void OnInteracting(InputAction.CallbackContext context);
         void OnLook(InputAction.CallbackContext context);
-        void OnInspecting(InputAction.CallbackContext context);
         void OnLighting(InputAction.CallbackContext context);
         void OnDrop(InputAction.CallbackContext context);
+    }
+    public interface IPlayerInspectActions
+    {
+        void OnInspecting(InputAction.CallbackContext context);
     }
 }

@@ -6,5 +6,6 @@ public class Player : MonoBehaviour
 {
     public Item heldItem;
     public CharacterController ctrl;
+    public Collider playerCollider;
     
 }
