@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: d17a9cd9656fe7942bc2853dddac79bf
+guid: 0a3b123f6b9e9b547bbed4d5595dfad8
 ModelImporter:
   serializedVersion: 21300
   internalIDToNameTable: []
@@ -7,8 +7,13 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: rowboat_lp_pCube9Mat
-    second: {fileID: 2100000, guid: 45072182014784e48a521a2d15680806, type: 2}
+      name: Body
+    second: {fileID: 2100000, guid: 63392aee7248a27439b327525660ceef, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Lid
+    second: {fileID: 2100000, guid: a8c64f4aa86da164d9a0c3d018c84efa, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
