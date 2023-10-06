@@ -5,25 +5,12 @@ using UnityEngine;
 public class Item : MonoBehaviour
 {
     public Transform prefab;
-    public bool isPickedUp { get; set; }
+    private bool _isPickedUp = false;
+    public bool IsPickedUp { get { return _isPickedUp; } set { _isPickedUp = value; } }
     [SerializeField]
     public bool isInspectable;
 
     public Rigidbody rb;
     public Collider itemCollider;
-
-
-    // Start is called before the first frame update
-
-    private void Awake()
-    {
-        isPickedUp = false;
-      
-
-    }
-    
-
-
-
 
 }

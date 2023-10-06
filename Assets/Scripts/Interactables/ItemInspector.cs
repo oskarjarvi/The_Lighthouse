@@ -1,11 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class ItemInspector : MonoBehaviour
 {
     private Transform selectedPrefab;
     public Camera inspectCamera;
+
+    private Vector2 lastMousePosition;
+    private float rotationSpeed = 100.0f;
+    private bool _isRotating = false;
 
     private bool _isInspecting = false;
     public bool IsInspecting { get { return _isInspecting; } set { _isInspecting = value; } }
@@ -16,12 +21,7 @@ public class ItemInspector : MonoBehaviour
         
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-    public void InspectItem(Item item)
+    public void StartInspectItem(Item item)
     {
 
         item.rb.useGravity = false;
@@ -39,5 +39,29 @@ public class ItemInspector : MonoBehaviour
         {
             child.gameObject.layer = LayerMask.NameToLayer("ExaminedItem");
         }
+    }
+    
+
+    public void StartRotation()
+    {
+        _isRotating = true;
+
+        lastMousePosition = Mouse.current.position.ReadValue();
+
+    }
+    public void DragInspection(Vector2 mouseInput)
+    {
+        if(_isRotating)
+        {
+
+            Vector3 rotationAmount = new Vector3(-mouseInput.y, mouseInput.x, 0) * rotationSpeed * Time.deltaTime;
+            selectedPrefab.transform.Rotate(rotationAmount);
+
+            lastMousePosition = Mouse.current.position.ReadValue();
+        }
+    }
+    public void StopRotation()
+    {
+        _isRotating = false;
     }
 }

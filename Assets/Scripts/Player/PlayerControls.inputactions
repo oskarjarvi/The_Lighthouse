@@ -161,7 +161,16 @@
                     "name": "Inspecting",
                     "type": "Value",
                     "id": "2d8f6530-55b1-41de-9984-5e35b63652b2",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "Rotating",
+                    "type": "Value",
+                    "id": "cea63b17-8afe-480a-a751-0e09af25c6e7",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
@@ -172,7 +181,7 @@
                     "name": "",
                     "id": "0bfb750c-967e-4a90-a920-8eed7b16c250",
                     "path": "<Mouse>/leftButton",
-                    "interactions": "",
+                    "interactions": "Hold",
                     "processors": "",
                     "groups": "",
                     "action": "Inspecting",
@@ -181,12 +190,12 @@
                 },
                 {
                     "name": "",
-                    "id": "284011a6-74ea-4187-acde-4227ce5b277d",
-                    "path": "",
+                    "id": "d86bba70-7883-457c-a817-afa40bf5d5da",
+                    "path": "<Mouse>/delta",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Inspecting",
+                    "action": "Rotating",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

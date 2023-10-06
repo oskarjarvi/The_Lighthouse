@@ -304,7 +304,6 @@ GameObject:
   - component: {fileID: 128923783}
   - component: {fileID: 128923786}
   - component: {fileID: 128923785}
-  - component: {fileID: 128923784}
   m_Layer: 0
   m_Name: Camera
   m_TagString: MainCamera
@@ -331,24 +330,6 @@ Transform:
   m_Father: {fileID: 1176739889}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &128923784
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 128923782}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2075d6da3bffd7247b164883073f5480, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  mouseSensitivity: 100
-  interactableLayerMask:
-    serializedVersion: 2
-    m_Bits: 64
-  minViewAngle: 45
-  playerBody: {fileID: 1176739889}
 --- !u!81 &128923785
 AudioListener:
   m_ObjectHideFlags: 0
@@ -1633,6 +1614,8 @@ GameObject:
   - component: {fileID: 1176739897}
   - component: {fileID: 1176739902}
   - component: {fileID: 1176739903}
+  - component: {fileID: 1176739904}
+  - component: {fileID: 1176739905}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -1685,6 +1668,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pickUpParent: {fileID: 1232555724}
+  interactableLayerMask:
+    serializedVersion: 2
+    m_Bits: 64
 --- !u!114 &1176739899
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1745,6 +1731,35 @@ MonoBehaviour:
   lanternLight: {fileID: 886490653}
   lanternSlot: {fileID: 1059823831}
   inactiveLanternSlot: {fileID: 302802921}
+--- !u!114 &1176739904
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1176739887}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e6c0b8b01fa7bf43af33eb5638e976c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inspectCamera: {fileID: 1881517122}
+--- !u!114 &1176739905
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1176739887}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2075d6da3bffd7247b164883073f5480, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mouseSensitivity: 100
+  playerCamera: {fileID: 128923786}
+  minViewAngle: 45
+  playerBody: {fileID: 1176739889}
 --- !u!1001 &1185280339
 PrefabInstance:
   m_ObjectHideFlags: 0

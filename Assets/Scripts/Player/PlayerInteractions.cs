@@ -12,41 +12,58 @@ public class PlayerInteractions : MonoBehaviour
     Player player;
     ItemInspector itemInspector;
     public Transform pickUpParent;
-    CameraController cameractrl;
+    public LayerMask interactableLayerMask;
+
+    private bool _isHittingItem = false;
+    private Item _hitItem = null;
+
+    private bool _isInspectingItem = false;
+    public bool IsInspectingItem {  get { return _isInspectingItem; } set { _isInspectingItem = value; } }
 
     private void Awake()
     {
         player = GetComponent<Player>();
-        cameractrl = GetComponent<CameraController>();
         itemInspector = GetComponent<ItemInspector>();
+
     }
 
     public void Interact()
     {
-        Debug.Log("im in here");
-        if(cameractrl != null)
-        {
-             if (cameractrl.IsHittingItem && player.heldItem == null)
-             {
-                    if(cameractrl.HitItem.isInspectable)
-                    {
-                        InspectItem(cameractrl.HitItem);
-                    }
-                    else
-                    {
-                        PickUpItem(cameractrl.HitItem);
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        RaycastHit hit;
 
-                    }
-             }
+        //check if it hit something with the interactable Layer within max distance (100)
+        if (Physics.Raycast(ray, out hit, 100, interactableLayerMask))
+        {
+            if (hit.collider != null)
+            {
+                _isHittingItem = true;
+                _hitItem = hit.collider.GetComponent<Item>();
+            }
+
         }
-       
+
+        if (_isHittingItem && _hitItem != null && player.heldItem == null)
+        {
+            if (_hitItem.isInspectable)
+            {
+                InspectItem(_hitItem);
+            }
+            else
+            {
+                PickUpItem(_hitItem);
+
+            }
+        }
+
+
     }
     public void PickUpItem(Item item)
     {
-        if(player.heldItem == null)
+        if (player.heldItem == null)
         {
             player.heldItem = item;
-            item.isPickedUp = true;
+            item.IsPickedUp = true;
 
             item.transform.localPosition = Vector3.zero;
             item.transform.localRotation = Quaternion.identity;
@@ -66,31 +83,30 @@ public class PlayerInteractions : MonoBehaviour
             DropItem();
             PickUpItem(item);
         }
-        
+
     }
     public void InspectItem(Item item)
     {
-        itemInspector.InspectItem(item);
+        _isInspectingItem = true;
+        itemInspector.StartInspectItem(item);
     }
     public void DropItem()
     {
-        
-            player.heldItem.transform.SetParent(null);
 
-            player.heldItem.rb.isKinematic = false;
-            player.heldItem.rb.useGravity = true;
+        player.heldItem.transform.SetParent(null);
+
+        player.heldItem.rb.isKinematic = false;
+        player.heldItem.rb.useGravity = true;
 
 
-            if (player != null)
-            {
-                Physics.IgnoreCollision(player.GetComponent<Collider>(), player.heldItem.itemCollider, false);
+        if (player != null)
+        {
+            Physics.IgnoreCollision(player.GetComponent<Collider>(), player.heldItem.itemCollider, false);
 
-            }
+        }
 
-            player.heldItem = null;
-        
+        player.heldItem = null;
+
     }
-
-
 
 }
