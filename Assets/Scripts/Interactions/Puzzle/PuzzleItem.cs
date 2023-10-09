@@ -16,10 +16,8 @@ public class PuzzleItem : InteractableItemBase
         if(player.heldItem == null)
         {
             PickUpItem();
-        }
-
+        }   
     }
-
     private void PickUpItem()
     {
             player.heldItem = this;
@@ -54,7 +52,12 @@ public class PuzzleItem : InteractableItemBase
     }
     private void PlacePuzzleItem()
     {
+        if(player.heldItem != null)
+        {
 
+        }
     }
+    
+   
 }
 

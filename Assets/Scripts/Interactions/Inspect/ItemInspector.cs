@@ -29,19 +29,7 @@ public class ItemInspector : MonoBehaviour
         inspectionCanvas.gameObject.SetActive(true);
         inspectCamera.gameObject.SetActive(true);
 
-        //float cameraDistance = 2.0f; // Constant factor
         selectedPrefab = Instantiate(item.transform, inspectCamera.transform.position + inspectCamera.transform.forward * 2f, transform.rotation);
-
-        //var bounds = selectedPrefab.GetComponent<MeshCollider>();
-
-        //Vector3 objectSizes = bounds.max - bounds.min;
-        //float objectSize = Mathf.Max(objectSizes.x, objectSizes.y, objectSizes.z);
-        //float cameraView = 2.0f * Mathf.Tan(0.5f * Mathf.Deg2Rad * inspectCamera.fieldOfView); // Visible height 1 meter in front
-        //float distance = cameraDistance * objectSize / cameraView; // Combined wanted distance from the object
-        //distance += 0.5f * objectSize; // Estimated offset from the center to the outside of the object
-        //inspectCamera.transform.position = bounds.center - distance * inspectCamera.transform.forward;
-
-
 
         selectedPrefab.gameObject.layer = LayerMask.NameToLayer("ExaminedItem");
         foreach (Transform child in selectedPrefab.gameObject.transform)
@@ -76,13 +64,7 @@ public class ItemInspector : MonoBehaviour
 
     }
 
-    private float CalculateScaleFactor(float objectSize, float cameraFOV)
-    {
-        // Calculate the scaling factor based on the object's size and camera field of view
-        // Adjust the formula as needed to achieve the desired scaling behavior
-        float desiredScaleFactor = Mathf.Tan(cameraFOV * 0.5f * Mathf.Deg2Rad) * objectSize * 2.0f;
-        return desiredScaleFactor;
-    }
+  
 
 
     public void CancelInspection()
@@ -91,7 +73,6 @@ public class ItemInspector : MonoBehaviour
         inspectionCanvas.gameObject.SetActive(false);
 
         inspectCamera.gameObject.SetActive(false);
-
         Destroy(selectedPrefab.gameObject);
     }
 }

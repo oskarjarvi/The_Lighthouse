@@ -13,7 +13,7 @@ public class PlayerInteractions : MonoBehaviour
     public Transform pickUpParent;
     public LayerMask interactableLayerMask;
 
-    private IInteractable _hitItem;
+    private InteractableItemBase _hitItem;
 
     private bool _isHittingItem = false;
 
@@ -32,12 +32,18 @@ public class PlayerInteractions : MonoBehaviour
         {
             if (hit.collider != null)
             {
-                _hitItem = hit.collider.GetComponent<IInteractable>();
+                _hitItem = hit.collider.GetComponent<InteractableItemBase>();
 
                 _isHittingItem = true;
             }
 
         }
+        else
+        {
+            _isHittingItem = false;
+            _hitItem = null;
+        }
+        
     }
     public void DropItem()
     {
@@ -49,7 +55,7 @@ public class PlayerInteractions : MonoBehaviour
 
     public void Interact()
     {
-        if ( _hitItem != null && player.heldItem == null)
+        if ( _hitItem != null && _isHittingItem)
         {
             _hitItem.Interact();
         }
