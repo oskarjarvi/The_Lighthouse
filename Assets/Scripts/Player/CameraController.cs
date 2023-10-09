@@ -12,13 +12,13 @@ public class CameraController : MonoBehaviour
     [SerializeField] float minViewAngle = 45f;
     [SerializeField] Transform playerBody;
 
-    private PlayerInteractions playerInteractions;
+    private ItemInspector itemInspector;
 
     float xRotation = 0f;
 
     private void Awake()
     {
-        playerInteractions = GetComponent<PlayerInteractions>();
+        itemInspector = GetComponent<ItemInspector>();
         Cursor.lockState = CursorLockMode.Locked;
 
       
@@ -26,7 +26,7 @@ public class CameraController : MonoBehaviour
     private void Update()
     {
 
-        if (playerInteractions.IsInspectingItem)
+        if (itemInspector.IsInspecting)
         {
             Cursor.lockState = CursorLockMode.None;
         }

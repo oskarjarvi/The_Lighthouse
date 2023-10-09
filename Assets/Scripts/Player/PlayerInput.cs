@@ -22,12 +22,13 @@ public class PlayerInput : MonoBehaviour
         cameraController = GetComponent<CameraController>();
         itemInspector = GetComponent<ItemInspector>();
 
-        playerControls.PlayerInspect.Inspecting.started += StartInspecting;
+        playerControls.PlayerInspect.Rotate.started += StartRotation;
 
-        playerControls.PlayerInspect.Inspecting.performed += HandleInspecting;
-        playerControls.PlayerInspect.Inspecting.canceled += StopInspecting;
+        playerControls.PlayerInspect.Rotate.canceled += StopRotation;
 
-        playerControls.PlayerInspect.Rotating.performed += HandleInspecting;
+        playerControls.PlayerInspect.Rotating.performed += HandleRotation;
+
+        playerControls.PlayerInspect.Cancel.performed += HandleCancelInspection;
 
     }
 
@@ -44,7 +45,7 @@ public class PlayerInput : MonoBehaviour
     private void OnDisable()
     {
         playerControls.PlayerMovement.Disable();
-        playerControls.PlayerInspect.Inspecting.Disable();
+        playerControls.PlayerInspect.Rotate.Disable();
         playerControls.PlayerMovement.Drop.Disable();
         playerControls.PlayerMovement.Walking.Disable();
         playerControls.PlayerMovement.Lighting.Disable();
@@ -60,10 +61,16 @@ public class PlayerInput : MonoBehaviour
         HandleMovement();
         HandleDropItem();
         HandleCamera();
-        if (playerInteractions.IsInspectingItem)
+        if (itemInspector.IsInspecting)
         {
             playerControls.PlayerMovement.Disable();
             playerControls.PlayerInspect.Enable();
+        }
+        else
+        {
+            playerControls.PlayerInspect.Disable();
+            playerControls.PlayerMovement.Enable();
+
         }
     }
     private void HandleLantern()
@@ -93,18 +100,18 @@ public class PlayerInput : MonoBehaviour
         }
     }
 
-    private void HandleInspecting(InputAction.CallbackContext context)
+    private void HandleRotation(InputAction.CallbackContext context)
     {
         Vector2 mouseDelta = context.ReadValue<Vector2>();
         itemInspector.DragInspection(mouseDelta);
     }
-    private void StartInspecting(InputAction.CallbackContext context)
+    private void StartRotation(InputAction.CallbackContext context)
     {
         itemInspector.StartRotation();
         Debug.Log("I started inspecting ");
 
     }
-    private void StopInspecting(InputAction.CallbackContext context)
+    private void StopRotation(InputAction.CallbackContext context)
     {
         itemInspector.StopRotation();
         Debug.Log("I cancelled inspecting ");
@@ -117,5 +124,9 @@ public class PlayerInput : MonoBehaviour
         {
             playerInteractions.DropItem();
         }
+    }
+    private void HandleCancelInspection(InputAction.CallbackContext context)
+    {
+        itemInspector.CancelInspection();
     }
 }

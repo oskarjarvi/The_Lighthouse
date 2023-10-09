@@ -158,7 +158,7 @@
             "id": "dcce1872-72cc-4f0a-a4f4-c32c775518d8",
             "actions": [
                 {
-                    "name": "Inspecting",
+                    "name": "Rotate",
                     "type": "Value",
                     "id": "2d8f6530-55b1-41de-9984-5e35b63652b2",
                     "expectedControlType": "",
@@ -174,6 +174,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
+                },
+                {
+                    "name": "Cancel",
+                    "type": "Button",
+                    "id": "4557ad92-8c16-44c3-83dd-40e51b835c8f",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -184,7 +193,7 @@
                     "interactions": "Hold",
                     "processors": "",
                     "groups": "",
-                    "action": "Inspecting",
+                    "action": "Rotate",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -196,6 +205,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "Rotating",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "5178d4f2-ec26-47c2-964f-b256ee436ad5",
+                    "path": "<Keyboard>/escape",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Cancel",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

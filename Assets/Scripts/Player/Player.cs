@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    public Item heldItem;
+    public PuzzleItem heldItem;
     public CharacterController ctrl;
     public Collider playerCollider;
     

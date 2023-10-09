@@ -180,7 +180,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             ""id"": ""dcce1872-72cc-4f0a-a4f4-c32c775518d8"",
             ""actions"": [
                 {
-                    ""name"": ""Inspecting"",
+                    ""name"": ""Rotate"",
                     ""type"": ""Value"",
                     ""id"": ""2d8f6530-55b1-41de-9984-5e35b63652b2"",
                     ""expectedControlType"": """",
@@ -196,6 +196,15 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Cancel"",
+                    ""type"": ""Button"",
+                    ""id"": ""4557ad92-8c16-44c3-83dd-40e51b835c8f"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -206,7 +215,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""interactions"": ""Hold"",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Inspecting"",
+                    ""action"": ""Rotate"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -218,6 +227,17 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Rotating"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""5178d4f2-ec26-47c2-964f-b256ee436ad5"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Cancel"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -235,8 +255,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         m_PlayerMovement_Drop = m_PlayerMovement.FindAction("Drop", throwIfNotFound: true);
         // PlayerInspect
         m_PlayerInspect = asset.FindActionMap("PlayerInspect", throwIfNotFound: true);
-        m_PlayerInspect_Inspecting = m_PlayerInspect.FindAction("Inspecting", throwIfNotFound: true);
+        m_PlayerInspect_Rotate = m_PlayerInspect.FindAction("Rotate", throwIfNotFound: true);
         m_PlayerInspect_Rotating = m_PlayerInspect.FindAction("Rotating", throwIfNotFound: true);
+        m_PlayerInspect_Cancel = m_PlayerInspect.FindAction("Cancel", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -376,14 +397,16 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     // PlayerInspect
     private readonly InputActionMap m_PlayerInspect;
     private List<IPlayerInspectActions> m_PlayerInspectActionsCallbackInterfaces = new List<IPlayerInspectActions>();
-    private readonly InputAction m_PlayerInspect_Inspecting;
+    private readonly InputAction m_PlayerInspect_Rotate;
     private readonly InputAction m_PlayerInspect_Rotating;
+    private readonly InputAction m_PlayerInspect_Cancel;
     public struct PlayerInspectActions
     {
         private @PlayerControls m_Wrapper;
         public PlayerInspectActions(@PlayerControls wrapper) { m_Wrapper = wrapper; }
-        public InputAction @Inspecting => m_Wrapper.m_PlayerInspect_Inspecting;
+        public InputAction @Rotate => m_Wrapper.m_PlayerInspect_Rotate;
         public InputAction @Rotating => m_Wrapper.m_PlayerInspect_Rotating;
+        public InputAction @Cancel => m_Wrapper.m_PlayerInspect_Cancel;
         public InputActionMap Get() { return m_Wrapper.m_PlayerInspect; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -393,22 +416,28 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         {
             if (instance == null || m_Wrapper.m_PlayerInspectActionsCallbackInterfaces.Contains(instance)) return;
             m_Wrapper.m_PlayerInspectActionsCallbackInterfaces.Add(instance);
-            @Inspecting.started += instance.OnInspecting;
-            @Inspecting.performed += instance.OnInspecting;
-            @Inspecting.canceled += instance.OnInspecting;
+            @Rotate.started += instance.OnRotate;
+            @Rotate.performed += instance.OnRotate;
+            @Rotate.canceled += instance.OnRotate;
             @Rotating.started += instance.OnRotating;
             @Rotating.performed += instance.OnRotating;
             @Rotating.canceled += instance.OnRotating;
+            @Cancel.started += instance.OnCancel;
+            @Cancel.performed += instance.OnCancel;
+            @Cancel.canceled += instance.OnCancel;
         }
 
         private void UnregisterCallbacks(IPlayerInspectActions instance)
         {
-            @Inspecting.started -= instance.OnInspecting;
-            @Inspecting.performed -= instance.OnInspecting;
-            @Inspecting.canceled -= instance.OnInspecting;
+            @Rotate.started -= instance.OnRotate;
+            @Rotate.performed -= instance.OnRotate;
+            @Rotate.canceled -= instance.OnRotate;
             @Rotating.started -= instance.OnRotating;
             @Rotating.performed -= instance.OnRotating;
             @Rotating.canceled -= instance.OnRotating;
+            @Cancel.started -= instance.OnCancel;
+            @Cancel.performed -= instance.OnCancel;
+            @Cancel.canceled -= instance.OnCancel;
         }
 
         public void RemoveCallbacks(IPlayerInspectActions instance)
@@ -436,7 +465,8 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     }
     public interface IPlayerInspectActions
     {
-        void OnInspecting(InputAction.CallbackContext context);
+        void OnRotate(InputAction.CallbackContext context);
         void OnRotating(InputAction.CallbackContext context);
+        void OnCancel(InputAction.CallbackContext context);
     }
 }
