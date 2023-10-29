@@ -30,13 +30,9 @@ public class PlayerInteractions : MonoBehaviour
 
         if (Physics.Raycast(ray, out hit, 100, interactableLayerMask))
         {
-            if (hit.collider != null)
-            {
-                _hitItem = hit.collider.GetComponent<InteractableItemBase>();
+            _hitItem = hit.collider.GetComponent<InteractableItemBase>();
 
-                _isHittingItem = true;
-            }
-
+            _isHittingItem = true;
         }
         else
         {
