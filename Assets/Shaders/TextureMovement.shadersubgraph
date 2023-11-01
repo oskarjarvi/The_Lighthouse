@@ -143,6 +143,27 @@
 
 {
     "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.Vector2MaterialSlot",
+    "m_ObjectId": "451629c2189743e684c21879d2c45efb",
+    "m_Id": 1,
+    "m_DisplayName": "Out",
+    "m_SlotType": 0,
+    "m_Hidden": false,
+    "m_ShaderOutputName": "Out",
+    "m_StageCapability": 3,
+    "m_Value": {
+        "x": 0.0,
+        "y": 0.0
+    },
+    "m_DefaultValue": {
+        "x": 0.0,
+        "y": 0.0
+    },
+    "m_Labels": []
+}
+
+{
+    "m_SGVersion": 0,
     "m_Type": "UnityEditor.ShaderGraph.Vector1MaterialSlot",
     "m_ObjectId": "4b37fea70a2741179da221e2171de513",
     "m_Id": 3,
@@ -275,27 +296,6 @@
 
 {
     "m_SGVersion": 0,
-    "m_Type": "UnityEditor.ShaderGraph.Vector2MaterialSlot",
-    "m_ObjectId": "6662c1f16ad34e3ba77c3227064dbb5e",
-    "m_Id": 1,
-    "m_DisplayName": "Out_Vector4",
-    "m_SlotType": 0,
-    "m_Hidden": false,
-    "m_ShaderOutputName": "Out_Vector4",
-    "m_StageCapability": 3,
-    "m_Value": {
-        "x": 0.0,
-        "y": 0.0
-    },
-    "m_DefaultValue": {
-        "x": 0.0,
-        "y": 0.0
-    },
-    "m_Labels": []
-}
-
-{
-    "m_SGVersion": 0,
     "m_Type": "UnityEditor.ShaderGraph.SubGraphOutputNode",
     "m_ObjectId": "6c3a57a437d447d6b22f06a0bba516d8",
     "m_Group": {
@@ -306,15 +306,15 @@
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": 1133.0,
-            "y": 60.0,
+            "x": 1037.0,
+            "y": 35.999996185302737,
             "width": 121.0,
-            "height": 77.0
+            "height": 77.00001525878906
         }
     },
     "m_Slots": [
         {
-            "m_Id": "6662c1f16ad34e3ba77c3227064dbb5e"
+            "m_Id": "451629c2189743e684c21879d2c45efb"
         }
     ],
     "synonyms": [],
@@ -455,10 +455,10 @@
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": 44.0,
-            "y": 253.0,
+            "x": 65.0,
+            "y": 221.0,
             "width": 109.0,
-            "height": 34.0
+            "height": 34.00001525878906
         }
     },
     "m_Slots": [
