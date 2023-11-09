@@ -2,9 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class InteractableItemBase : MonoBehaviour
+#nullable enable
+
+public interface InteractableItemBase
 {
-    protected Rigidbody rb;
-    public abstract void Interact();
+    public Rigidbody? rb { get; }
+    public void Interact();
+
+    public string InteractionPrompt { get; }
+
+    public bool Interacted { get; }
 
 }

@@ -17,14 +17,17 @@ public class ItemInspector : MonoBehaviour
     private bool _isInspecting = false;
     public bool IsInspecting { get { return _isInspecting; } set { _isInspecting = value; } }
 
+    [SerializeField]
+    InteractionUIController _interactionUIController;
+
 
     
     public void StartInspectItem(InspectableItem item)
     {
         _isInspecting = true;
-        var itemRb = item.GetComponent<Rigidbody>();
+        
 
-        itemRb.useGravity = false;
+        item.rb.useGravity = false;
 
         inspectionCanvas.gameObject.SetActive(true);
         inspectCamera.gameObject.SetActive(true);
@@ -36,6 +39,8 @@ public class ItemInspector : MonoBehaviour
         {
             child.gameObject.layer = LayerMask.NameToLayer("ExaminedItem");
         }
+        _interactionUIController.gameObject.SetActive(false);
+
 
     }
 
@@ -74,5 +79,7 @@ public class ItemInspector : MonoBehaviour
 
         inspectCamera.gameObject.SetActive(false);
         Destroy(selectedPrefab.gameObject);
+        _interactionUIController.gameObject.SetActive(true);
+
     }
 }

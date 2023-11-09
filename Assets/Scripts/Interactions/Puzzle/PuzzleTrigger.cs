@@ -2,8 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PuzzleTrigger : InteractableItemBase
+public class PuzzleTrigger :MonoBehaviour, InteractableItemBase
 {
+    [SerializeField]
+    private string _prompt;
+
     public int triggerIndex;
     public SequencePuzzleController controller;
     private bool _interactable = true;
@@ -11,9 +14,14 @@ public class PuzzleTrigger : InteractableItemBase
     public Animator animator;
     public AnimationClip animationClip;
 
-    public override void Interact()
+    public Rigidbody rb => null;
+
+    public string InteractionPrompt => _prompt;
+
+    public bool Interacted => !_interactable;
+
+    public void Interact()
     {
-        Debug.Log(_interactable);
         if(_interactable)
         {
             controller.StartPuzzle();

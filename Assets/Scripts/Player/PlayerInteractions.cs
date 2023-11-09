@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Net.NetworkInformation;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -13,9 +14,12 @@ public class PlayerInteractions : MonoBehaviour
     public Transform pickUpParent;
     public LayerMask interactableLayerMask;
 
+    public float maxInteractDistance;
     private InteractableItemBase _hitItem;
 
     private bool _isHittingItem = false;
+
+    [SerializeField] private InteractionUIController _interactionUIController;
 
 
     private void Awake()
@@ -28,19 +32,27 @@ public class PlayerInteractions : MonoBehaviour
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
 
-        if (Physics.Raycast(ray, out hit, 100, interactableLayerMask))
+        if (Physics.Raycast(ray, out hit, maxInteractDistance, interactableLayerMask))
         {
             _hitItem = hit.collider.GetComponent<InteractableItemBase>();
 
             _isHittingItem = true;
+            if(!_hitItem.Interacted)
+            {
+                _interactionUIController.SetUp(_hitItem.InteractionPrompt);
+
+            }
+
         }
         else
         {
+            _interactionUIController.Close();
             _isHittingItem = false;
             _hitItem = null;
         }
         
     }
+   
     public void DropItem()
     {
         if(player.heldItem != null)
@@ -51,7 +63,7 @@ public class PlayerInteractions : MonoBehaviour
 
     public void Interact()
     {
-        if ( _hitItem != null && _isHittingItem)
+        if ( _hitItem != null && _isHittingItem && !_hitItem.Interacted)
         {
             _hitItem.Interact();
         }

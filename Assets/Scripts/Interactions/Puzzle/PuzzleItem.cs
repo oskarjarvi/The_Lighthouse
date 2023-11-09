@@ -2,41 +2,65 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PuzzleItem : InteractableItemBase
+public class PuzzleItem : MonoBehaviour, InteractableItemBase
 {
     [SerializeField] private Transform heldItemSlot;
     [SerializeField] Player player;
+    [SerializeField] string _prompt;
+
+    private Rigidbody _rb;
+    public Rigidbody rb => _rb;
+
+    public string InteractionPrompt => _prompt;
+    public bool hasInteracted = false;
+    public bool Interacted => hasInteracted;
 
     private void Awake()
     {
-        rb = GetComponent<Rigidbody>();
+        _rb = GetComponent<Rigidbody>();
     }
-    public override void Interact()
+    public void Interact()
     {
-        if(player.heldItem == null)
+        Debug.Log(transform.localScale);
+
+        if (player.heldItem == null)
         {
             PickUpItem();
-        }   
+        }
+
     }
     private void PickUpItem()
     {
-            player.heldItem = this;
-            transform.localPosition = Vector3.zero;
-            transform.localRotation = Quaternion.identity;
+        player.heldItem = this;
 
-            transform.SetParent(heldItemSlot, false);
+        Vector3 currentScale = transform.localScale;
+        Debug.Log(currentScale);
 
-            rb.isKinematic = true;
 
-            if (player.GetComponent<Collider>() != null)
-            {
-                Physics.IgnoreCollision(player.GetComponent<Collider>(), GetComponent<Collider>(), true);
-            }
-        
+        transform.SetParent(heldItemSlot, false);
+
+        transform.localScale = currentScale;
+        transform.localPosition = Vector3.zero;
+        transform.localRotation = Quaternion.identity;
+
+
+        rb.isKinematic = true;
+
+        if (player.GetComponent<Collider>() != null)
+        {
+            Physics.IgnoreCollision(player.GetComponent<Collider>(), GetComponent<Collider>(), true);
+        }
+
     }
     public void DropItem()
     {
+        Vector3 currentScale = transform.localScale;
+
+        // Set the parent to null (dropping the item)
         transform.SetParent(null);
+
+        // Reset the scale after setting the parent to null
+        transform.localScale = currentScale;
 
         rb.isKinematic = false;
         rb.useGravity = true;
@@ -50,14 +74,8 @@ public class PuzzleItem : InteractableItemBase
 
         player.heldItem = null;
     }
-    private void PlacePuzzleItem()
-    {
-        if(player.heldItem != null)
-        {
 
-        }
-    }
-    
-   
+
+
 }
 
