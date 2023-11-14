@@ -11,8 +11,9 @@ public class PuzzleTrigger :MonoBehaviour, InteractableItemBase
     public SequencePuzzleController controller;
     private bool _interactable = true;
 
-    public Animator animator;
-    public AnimationClip animationClip;
+    private Animator animator;
+
+    public string animationBool;
 
     public Rigidbody rb => null;
 
@@ -20,6 +21,11 @@ public class PuzzleTrigger :MonoBehaviour, InteractableItemBase
 
     public bool Interacted => !_interactable;
 
+    public void Awake()
+    {
+        animator = GetComponent<Animator>();
+
+    }
     public void Interact()
     {
         if(_interactable)
@@ -27,14 +33,14 @@ public class PuzzleTrigger :MonoBehaviour, InteractableItemBase
             controller.StartPuzzle();
             controller.SequenceTrigger(this);
 
-            //triggerAnimation
             _interactable = false;
+            animator.SetBool(animationBool, true);
+
         }
     }
     public void Reset()
     {
-        Debug.Log("resetting this variable");
         _interactable = true;
-        //Inverse animation
+        animator.SetBool(animationBool, false);
     }
 }
