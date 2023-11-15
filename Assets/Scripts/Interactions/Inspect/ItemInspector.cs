@@ -9,10 +9,10 @@ public class ItemInspector : MonoBehaviour
     private Transform selectedPrefab;
     public Camera inspectCamera;
     public Canvas inspectionCanvas;
-    
+
     private float rotationSpeed = 100.0f;
     private bool _isRotating = false;
-    
+
 
     private bool _isInspecting = false;
     public bool IsInspecting { get { return _isInspecting; } set { _isInspecting = value; } }
@@ -21,11 +21,11 @@ public class ItemInspector : MonoBehaviour
     InteractionUIController _interactionUIController;
 
 
-    
+
     public void StartInspectItem(InspectableItem item)
     {
         _isInspecting = true;
-        
+
 
         item.rb.useGravity = false;
 
@@ -35,6 +35,7 @@ public class ItemInspector : MonoBehaviour
         selectedPrefab = Instantiate(item.transform, inspectCamera.transform.position + inspectCamera.transform.forward * 2f, transform.rotation);
 
         selectedPrefab.gameObject.layer = LayerMask.NameToLayer("ExaminedItem");
+
         foreach (Transform child in selectedPrefab.gameObject.transform)
         {
             child.gameObject.layer = LayerMask.NameToLayer("ExaminedItem");
@@ -57,7 +58,7 @@ public class ItemInspector : MonoBehaviour
         {
             Debug.Log(mouseInput);
 
-            Vector3 rotationAmount = new Vector3(mouseInput.y, -mouseInput.x,0) * rotationSpeed * Time.deltaTime;
+            Vector3 rotationAmount = new Vector3(mouseInput.y, -mouseInput.x, 0) * rotationSpeed * Time.deltaTime;
             selectedPrefab.transform.Rotate(rotationAmount, Space.World);
 
 
@@ -68,10 +69,6 @@ public class ItemInspector : MonoBehaviour
         _isRotating = false;
 
     }
-
-  
-
-
     public void CancelInspection()
     {
         _isInspecting = false;
