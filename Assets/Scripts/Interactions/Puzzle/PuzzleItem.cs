@@ -21,7 +21,6 @@ public class PuzzleItem : MonoBehaviour, InteractableItemBase
     }
     public void Interact()
     {
-        Debug.Log(transform.localScale);
 
         if (player.heldItem == null)
         {

@@ -32,15 +32,16 @@ public class PuzzleTrigger :MonoBehaviour, InteractableItemBase
         {
             controller.StartPuzzle();
             controller.SequenceTrigger(this);
-
-            _interactable = false;
             animator.SetBool(animationBool, true);
 
+            _interactable = false;
         }
     }
     public void Reset()
     {
-        _interactable = true;
+        Debug.Log("resetting" + this.gameObject);
         animator.SetBool(animationBool, false);
+        _interactable = true;
+
     }
 }

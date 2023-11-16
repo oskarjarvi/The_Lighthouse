@@ -22,7 +22,6 @@ public class SequencePuzzleController : PuzzleBase
     {
         _isPuzzleSolved = true;
         Debug.Log("yay you unlocked the door");
-        //puzzleGoal.SendMessage("Solved", SendMessageOptions.DontRequireReceiver);
 
     }
 
@@ -30,10 +29,12 @@ public class SequencePuzzleController : PuzzleBase
     {
         Debug.Log("resetting");
 
-        foreach (PuzzleTrigger puzzleTrigger in puzzleTriggerSequence)
+        foreach (PuzzleTrigger puzzleTrigger in playerTriggerSequence)
         {
+            Debug.Log("PuzzleTrigger: " + puzzleTrigger.triggerIndex);
             puzzleTrigger.Reset();
         }
+
         playerTriggerSequence.Clear();
 
     }
@@ -49,30 +50,33 @@ public class SequencePuzzleController : PuzzleBase
         }
 
     }
-   
-    private void CheckSequence()
+    private IEnumerator CheckSequenceCoroutine()
     {
+        yield return new WaitForSeconds(1.5f);
+
         bool correctSequence = true;
-        for(int i=0; i< puzzleTriggerSequence.Count;i++)
+        for (int i = 0; i < puzzleTriggerSequence.Count; i++)
         {
-            if(puzzleTriggerSequence[i] != playerTriggerSequence[i])
+            if (puzzleTriggerSequence[i].triggerIndex != playerTriggerSequence[i].triggerIndex)
             {
                 correctSequence = false;
                 break;
             }
-           
         }
-        if(correctSequence)
+
+        if (correctSequence)
         {
             SolvePuzzle();
         }
         else
         {
-
             ResetPuzzle();
-
         }
+    }
 
+    private void CheckSequence()
+    {
+        StartCoroutine(CheckSequenceCoroutine());
     }
 
 }
