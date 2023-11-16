@@ -28,7 +28,7 @@ public class PuzzleTrigger :MonoBehaviour, InteractableItemBase
     }
     public void Interact()
     {
-        if(_interactable)
+        if(_interactable && controller != null)
         {
             controller.StartPuzzle();
             controller.SequenceTrigger(this);
