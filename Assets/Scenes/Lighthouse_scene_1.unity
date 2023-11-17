@@ -25608,7 +25608,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1762003483}
   m_LocalRotation: {x: 0.025324132, y: -0.998641, z: -0.0012426311, w: -0.04553497}
-  m_LocalPosition: {x: -0.2484889, y: -0.14091475, z: 1.7019744}
+  m_LocalPosition: {x: -0.291, y: -0.143, z: 1.747}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -38909,6 +38909,7 @@ GameObject:
   - component: {fileID: 4827197372084107460}
   - component: {fileID: 5311563393465180800}
   - component: {fileID: 5311563393465180799}
+  - component: {fileID: 5311563393465180801}
   m_Layer: 6
   m_Name: outsideDoor
   m_TagString: Untagged
@@ -38955,6 +38956,19 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!65 &5311563393465180801
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5311563393465180798}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.23421925, y: 2.658695, z: 2.0478814}
+  m_Center: {x: -0.11265294, y: 0.0046730046, z: 1.0115807}
 --- !u!1 &5353259614773286866
 GameObject:
   m_ObjectHideFlags: 0
