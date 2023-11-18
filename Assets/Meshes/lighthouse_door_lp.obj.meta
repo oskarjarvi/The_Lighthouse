@@ -3,7 +3,12 @@ guid: 13fb766f12a4c184691458331e4e4eb0
 ModelImporter:
   serializedVersion: 21300
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Lighthouse_door_lp_lighthousedoorMat
+    second: {fileID: 2100000, guid: 65e27d67e40f2c1469f6a946e8f4dcd3, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
