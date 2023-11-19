@@ -51,31 +51,31 @@ public class PlayerInteractions : MonoBehaviour
             _isHittingItem = true;
             MeshRenderer meshRenderer = hit.collider.GetComponent<MeshRenderer>();
 
-            if(meshRenderer != null)
-            {
-                Material meshMat = meshRenderer.material;
-
-
-                ToggleEmission(meshMat);
-                activeMaterials.Add(meshMat);
-
-            }
-            else
-            {
-                MeshRenderer[] childRenderers = hit.collider.GetComponentsInChildren<MeshRenderer>();
-                foreach(MeshRenderer childRenderer in childRenderers)
-                {
-                    Material childMat = childRenderer.material; // Declare a local variable
-                    ToggleEmission(childMat);
-                    activeMaterials.Add(childMat);
-
-                }
-
-            }
+           
             if (!_hitItem.Interacted && _isHittingItem)
             {
                 _interactionUIController.SetUp(_hitItem.InteractionPrompt);
+                if (meshRenderer != null)
+                {
+                    Material meshMat = meshRenderer.material;
 
+
+                    ToggleEmission(meshMat);
+                    activeMaterials.Add(meshMat);
+
+                }
+                else
+                {
+                    MeshRenderer[] childRenderers = hit.collider.GetComponentsInChildren<MeshRenderer>();
+                    foreach (MeshRenderer childRenderer in childRenderers)
+                    {
+                        Material childMat = childRenderer.material; // Declare a local variable
+                        ToggleEmission(childMat);
+                        activeMaterials.Add(childMat);
+
+                    }
+
+                }
 
             }
         }

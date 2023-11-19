@@ -11,6 +11,8 @@ public class SequencePuzzleController : PuzzleBase
     public List<PuzzleTrigger> playerTriggerSequence = new List<PuzzleTrigger>();
 
     private bool _isPuzzleSolved = false;
+
+    
     public override bool IsSolved { get => _isPuzzleSolved; set => value = _isPuzzleSolved; }
 
     public override void StartPuzzle()
@@ -22,6 +24,7 @@ public class SequencePuzzleController : PuzzleBase
     {
         _isPuzzleSolved = true;
         Debug.Log("yay you unlocked the door");
+        puzzleGoal.GetComponent<Animator>().SetBool("puzzleSolved", _isPuzzleSolved);
 
     }
 
