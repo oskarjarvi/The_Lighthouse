@@ -1,9 +1,19 @@
 fileFormatVersion: 2
-guid: ba2df357b71cec148884fe23de01d1ad
+guid: 45b913d793bc4c64ab51c92eb7df5c27
 ModelImporter:
   serializedVersion: 21300
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: glasspart
+    second: {fileID: 2100000, guid: c0393a8b89522de4780cc411f30177ec, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: standpart
+    second: {fileID: 2100000, guid: aeb1143b2f5db38478c0698b290e12f3, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
@@ -35,7 +45,7 @@ ModelImporter:
     isReadable: 0
   meshes:
     lODScreenPercentages: []
-    globalScale: 1
+    globalScale: 100
     meshCompression: 0
     addColliders: 0
     useSRGBMaterialColor: 1
