@@ -3,7 +3,12 @@ guid: c45f02ab712697142b9ef80618425540
 ModelImporter:
   serializedVersion: 21300
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: stairs_Lighthousestairs1Mat
+    second: {fileID: 2100000, guid: d244f0774444b8b458afe6a5e86d1f71, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
