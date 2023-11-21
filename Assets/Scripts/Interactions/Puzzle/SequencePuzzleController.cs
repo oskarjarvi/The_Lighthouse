@@ -6,11 +6,15 @@ public class SequencePuzzleController : PuzzleBase
 {
     public List<PuzzleTrigger> puzzleTriggerSequence;
 
+    public List<int> puzzleTriggerIndexList;
+
     public GameObject puzzleGoal;
 
     public List<PuzzleTrigger> playerTriggerSequence = new List<PuzzleTrigger>();
 
     private bool _isPuzzleSolved = false;
+
+    public bool IsSequenceSensitive;
 
     
     public override bool IsSolved { get => _isPuzzleSolved; set => value = _isPuzzleSolved; }
@@ -34,7 +38,6 @@ public class SequencePuzzleController : PuzzleBase
 
         foreach (PuzzleTrigger puzzleTrigger in playerTriggerSequence)
         {
-            Debug.Log("PuzzleTrigger: " + puzzleTrigger.triggerIndex);
             puzzleTrigger.Reset();
         }
 
@@ -43,11 +46,10 @@ public class SequencePuzzleController : PuzzleBase
     }
     public void SequenceTrigger(PuzzleTrigger trigger)
     {
-        Debug.Log("adding to sequence");
        
         playerTriggerSequence.Add(trigger);
         
-        if(playerTriggerSequence.Count == puzzleTriggerSequence.Count)
+        if(playerTriggerSequence.Count == puzzleTriggerSequence.Count ||playerTriggerSequence.Count == puzzleTriggerIndexList.Count)
         {
             CheckSequence();
         }
@@ -58,15 +60,33 @@ public class SequencePuzzleController : PuzzleBase
         yield return new WaitForSeconds(1.5f);
 
         bool correctSequence = true;
-        for (int i = 0; i < puzzleTriggerSequence.Count; i++)
+        if (IsSequenceSensitive)
         {
-            if (puzzleTriggerSequence[i].triggerIndex != playerTriggerSequence[i].triggerIndex)
+            for (int i = 0; i < puzzleTriggerSequence.Count; i++)
             {
-                correctSequence = false;
-                break;
+
+                if (puzzleTriggerSequence[i].triggerIndex != playerTriggerSequence[i].triggerIndex)
+                {
+                    correctSequence = false;
+                    break;
+                }
             }
         }
+        else
+        {
 
+            for (int i = 0;i < playerTriggerSequence.Count;i++)
+            {
+                Debug.Log(playerTriggerSequence[i].triggerIndex);
+                Debug.Log(puzzleTriggerIndexList[i]);
+                if (!puzzleTriggerIndexList.Contains(playerTriggerSequence[i].triggerIndex))
+                {
+
+                    correctSequence = false;
+                    break;
+                }
+            }
+        }
         if (correctSequence)
         {
             SolvePuzzle();
@@ -75,6 +95,7 @@ public class SequencePuzzleController : PuzzleBase
         {
             ResetPuzzle();
         }
+
     }
 
     private void CheckSequence()

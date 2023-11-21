@@ -25,6 +25,7 @@ public class ItemInspector : MonoBehaviour
     public void StartInspectItem(InspectableItem item)
     {
         _isInspecting = true;
+        Quaternion rotation = Quaternion.Euler(90f, 180f, 0f);
 
 
         item.rb.useGravity = false;
@@ -32,7 +33,7 @@ public class ItemInspector : MonoBehaviour
         inspectionCanvas.gameObject.SetActive(true);
         inspectCamera.gameObject.SetActive(true);
 
-        selectedPrefab = Instantiate(item.transform, inspectCamera.transform.position + inspectCamera.transform.forward * 2f, transform.rotation);
+        selectedPrefab = Instantiate(item.transform, inspectCamera.transform.position + inspectCamera.transform.forward * 1f, rotation);
 
         selectedPrefab.gameObject.layer = LayerMask.NameToLayer("ExaminedItem");
 
