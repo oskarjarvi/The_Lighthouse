@@ -21,9 +21,13 @@ public class PuzzleTrigger :MonoBehaviour, InteractableItemBase
 
     public bool Interacted => !_interactable;
 
+
+  
+
     public void Awake()
     {
         animator = GetComponent<Animator>();
+
 
     }
     public void Interact()
@@ -44,4 +48,5 @@ public class PuzzleTrigger :MonoBehaviour, InteractableItemBase
         _interactable = true;
 
     }
+   
 }

@@ -7,6 +7,7 @@ using UnityEngine;
 public interface InteractableItemBase
 {
     public Rigidbody? rb { get; }
+    
     public void Interact();
 
     public string InteractionPrompt { get; }

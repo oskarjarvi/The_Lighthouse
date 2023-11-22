@@ -9,6 +9,8 @@ public class InteractableItem : MonoBehaviour, InteractableItemBase
     [SerializeField]
     private string _prompt;
 
+
+
     public Rigidbody rb => null;
 
     public bool hasInteracted = false;
@@ -16,14 +18,18 @@ public class InteractableItem : MonoBehaviour, InteractableItemBase
 
     public bool Interacted => hasInteracted;
 
+    
+
     private void Awake()
     {
         animator = GetComponent<Animator>();
+       
     }
     public void Interact()
     {
         hasInteracted = true;
         animator.SetBool(animationBool, true);
     }
+    
 
 }

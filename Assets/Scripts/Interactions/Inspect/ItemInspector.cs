@@ -10,6 +10,8 @@ public class ItemInspector : MonoBehaviour
     public Camera inspectCamera;
     public Canvas inspectionCanvas;
 
+    public GameObject inspectGUI;
+
     private float rotationSpeed = 100.0f;
     private bool _isRotating = false;
 
@@ -19,6 +21,7 @@ public class ItemInspector : MonoBehaviour
 
     [SerializeField]
     InteractionUIController _interactionUIController;
+
 
 
 
@@ -32,6 +35,7 @@ public class ItemInspector : MonoBehaviour
 
         inspectionCanvas.gameObject.SetActive(true);
         inspectCamera.gameObject.SetActive(true);
+        inspectGUI.SetActive(true);
 
         selectedPrefab = Instantiate(item.transform, inspectCamera.transform.position + inspectCamera.transform.forward * 1f, rotation);
 
@@ -43,7 +47,16 @@ public class ItemInspector : MonoBehaviour
         }
         _interactionUIController.gameObject.SetActive(false);
 
+    }
+    public void ToggleText()
+    {
+        InspectableItem tempVar = selectedPrefab.GetComponent<InspectableItem>();
 
+        if (tempVar != null && tempVar.page != null)
+        {
+            tempVar.page.SetActive(!tempVar.page.activeSelf);
+
+        }
     }
 
 
@@ -72,12 +85,14 @@ public class ItemInspector : MonoBehaviour
     }
     public void CancelInspection()
     {
+        inspectGUI.SetActive(false);
+
         _isInspecting = false;
         inspectionCanvas.gameObject.SetActive(false);
 
         inspectCamera.gameObject.SetActive(false);
         Destroy(selectedPrefab.gameObject);
         _interactionUIController.gameObject.SetActive(true);
-
+        
     }
 }

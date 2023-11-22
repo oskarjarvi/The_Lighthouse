@@ -205,6 +205,15 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ToggleText"",
+                    ""type"": ""Button"",
+                    ""id"": ""53117139-a1cb-4166-977f-60f7d32c092d"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -240,6 +249,17 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""action"": ""Cancel"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""10002c45-996e-4cc6-89d9-d8c50a3eebeb"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ToggleText"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -258,6 +278,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         m_PlayerInspect_Rotate = m_PlayerInspect.FindAction("Rotate", throwIfNotFound: true);
         m_PlayerInspect_Rotating = m_PlayerInspect.FindAction("Rotating", throwIfNotFound: true);
         m_PlayerInspect_Cancel = m_PlayerInspect.FindAction("Cancel", throwIfNotFound: true);
+        m_PlayerInspect_ToggleText = m_PlayerInspect.FindAction("ToggleText", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -400,6 +421,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     private readonly InputAction m_PlayerInspect_Rotate;
     private readonly InputAction m_PlayerInspect_Rotating;
     private readonly InputAction m_PlayerInspect_Cancel;
+    private readonly InputAction m_PlayerInspect_ToggleText;
     public struct PlayerInspectActions
     {
         private @PlayerControls m_Wrapper;
@@ -407,6 +429,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         public InputAction @Rotate => m_Wrapper.m_PlayerInspect_Rotate;
         public InputAction @Rotating => m_Wrapper.m_PlayerInspect_Rotating;
         public InputAction @Cancel => m_Wrapper.m_PlayerInspect_Cancel;
+        public InputAction @ToggleText => m_Wrapper.m_PlayerInspect_ToggleText;
         public InputActionMap Get() { return m_Wrapper.m_PlayerInspect; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -425,6 +448,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @Cancel.started += instance.OnCancel;
             @Cancel.performed += instance.OnCancel;
             @Cancel.canceled += instance.OnCancel;
+            @ToggleText.started += instance.OnToggleText;
+            @ToggleText.performed += instance.OnToggleText;
+            @ToggleText.canceled += instance.OnToggleText;
         }
 
         private void UnregisterCallbacks(IPlayerInspectActions instance)
@@ -438,6 +464,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @Cancel.started -= instance.OnCancel;
             @Cancel.performed -= instance.OnCancel;
             @Cancel.canceled -= instance.OnCancel;
+            @ToggleText.started -= instance.OnToggleText;
+            @ToggleText.performed -= instance.OnToggleText;
+            @ToggleText.canceled -= instance.OnToggleText;
         }
 
         public void RemoveCallbacks(IPlayerInspectActions instance)
@@ -468,5 +497,6 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         void OnRotate(InputAction.CallbackContext context);
         void OnRotating(InputAction.CallbackContext context);
         void OnCancel(InputAction.CallbackContext context);
+        void OnToggleText(InputAction.CallbackContext context);
     }
 }

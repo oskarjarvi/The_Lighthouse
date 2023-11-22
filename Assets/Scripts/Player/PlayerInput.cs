@@ -30,6 +30,8 @@ public class PlayerInput : MonoBehaviour
 
         playerControls.PlayerInspect.Cancel.performed += HandleCancelInspection;
 
+        playerControls.PlayerInspect.ToggleText.performed += HandleToggleText;
+
     }
 
     private void OnEnable()
@@ -128,5 +130,9 @@ public class PlayerInput : MonoBehaviour
     private void HandleCancelInspection(InputAction.CallbackContext context)
     {
         itemInspector.CancelInspection();
+    }
+    private void HandleToggleText(InputAction.CallbackContext context)
+    {
+        itemInspector.ToggleText();
     }
 }

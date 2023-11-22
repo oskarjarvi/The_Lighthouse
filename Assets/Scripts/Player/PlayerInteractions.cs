@@ -14,12 +14,6 @@ public class PlayerInteractions : MonoBehaviour
     Player player;
     public Transform pickUpParent;
     public LayerMask interactableLayerMask;
-    [SerializeField]
-    Color oldEmissionColor;
-    [SerializeField]
-    Color newEmissionColor;
-    [SerializeField]
-    float emissionIntensity;
 
     public float maxInteractDistance;
     private InteractableItemBase _hitItem;
@@ -28,14 +22,14 @@ public class PlayerInteractions : MonoBehaviour
 
     [SerializeField] private InteractionUIController _interactionUIController;
 
-    List<Material> activeMaterials = new List<Material>();
 
+    private ItemInspector _itemInspector;
 
 
     private void Awake()
     {
         player = GetComponent<Player>();
-
+        _itemInspector = GetComponent<ItemInspector>();
 
     }
     private void Update()
@@ -43,78 +37,33 @@ public class PlayerInteractions : MonoBehaviour
 
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
-
-        if (Physics.Raycast(ray, out hit, maxInteractDistance,interactableLayerMask))
+        if (!_itemInspector.IsInspecting)
         {
-            _hitItem = hit.collider.GetComponent<InteractableItemBase>();
 
-            _isHittingItem = true;
-            MeshRenderer meshRenderer = hit.collider.GetComponent<MeshRenderer>();
 
-           
-            if (!_hitItem.Interacted && _isHittingItem)
+            if (Physics.Raycast(ray, out hit, maxInteractDistance, interactableLayerMask))
             {
-                _interactionUIController.SetUp(_hitItem.InteractionPrompt);
-                if (meshRenderer != null)
+                _hitItem = hit.collider.GetComponent<InteractableItemBase>();
+
+                _isHittingItem = true;
+
+
+                if (!_hitItem.Interacted && _isHittingItem)
                 {
-                    Material meshMat = meshRenderer.material;
-
-
-                    ToggleEmission(meshMat);
-                    activeMaterials.Add(meshMat);
-
+                    _interactionUIController.SetUp(_hitItem.InteractionPrompt);
                 }
-                else
-                {
-                    MeshRenderer[] childRenderers = hit.collider.GetComponentsInChildren<MeshRenderer>();
-                    foreach (MeshRenderer childRenderer in childRenderers)
-                    {
-                        Material childMat = childRenderer.material; // Declare a local variable
-                        ToggleEmission(childMat);
-                        activeMaterials.Add(childMat);
-
-                    }
-
-                }
-
-            }
-        }
-
-        else
-        {
-            foreach (Material activeMat in activeMaterials)
-            {
-                ResetEmission(activeMat);
             }
 
-            _isHittingItem = false;
-            _interactionUIController.Close();
-            _hitItem = null;
-        }
-
-    }
-    void ToggleEmission(Material emissionMaterial)
-    {
-        if(emissionMaterial != null)
-        {
-            emissionMaterial.SetColor("_EmissionColor", newEmissionColor * emissionIntensity);
-
-            
-            emissionMaterial.EnableKeyword("_EMISSION");
-
-        }
-
-    }
-    void ResetEmission(Material emissionMaterial)
-    {
-        if(emissionMaterial != null)
-        {
-            emissionMaterial.SetColor("_EmissionColor", oldEmissionColor * 0f);
-
-            // Disable emission globally for the material
-            emissionMaterial.DisableKeyword("_EMISSION");
+            else
+            {
+                _isHittingItem = false;
+                _interactionUIController.Close();
+                _hitItem = null;
+            }
         }
     }
+    
+  
 
 
     public void DropItem()

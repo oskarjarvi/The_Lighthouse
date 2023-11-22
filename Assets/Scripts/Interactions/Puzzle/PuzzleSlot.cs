@@ -24,9 +24,11 @@ public class PuzzleSlot : MonoBehaviour, InteractableItemBase
     public bool Interacted => hasInteracted;
 
 
+
     private void Awake()
     {
          animator = GetComponent<Animator>();
+       
     }
     public void Interact()
     {
@@ -56,4 +58,5 @@ public class PuzzleSlot : MonoBehaviour, InteractableItemBase
         }
 
     }
+   
 }
