@@ -20,7 +20,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: lighthouse
+  m_Name: Lighthouse
   m_Shader: {fileID: 4800000, guid: 933532a4fcc9baf4fa0491de14d08ed7, type: 3}
   m_ValidKeywords:
   - _METALLICSPECGLOSSMAP
@@ -37,11 +37,11 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _BaseMap:
-        m_Texture: {fileID: 2800000, guid: 69e883208c0b07b478f989feebc7c869, type: 3}
+        m_Texture: {fileID: 2800000, guid: a4ba85ffc1435e645820104c263e19bf, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BumpMap:
-        m_Texture: {fileID: 2800000, guid: 917537e981342634f9d83a29d68bdf23, type: 3}
+        m_Texture: {fileID: 2800000, guid: 410b407b0ebf93e41a9ced1da1fe6413, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _DetailAlbedoMap:
@@ -61,11 +61,11 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: 69e883208c0b07b478f989feebc7c869, type: 3}
+        m_Texture: {fileID: 2800000, guid: a4ba85ffc1435e645820104c263e19bf, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
-        m_Texture: {fileID: 2800000, guid: 8b879548257c28344aed3801d6aa5853, type: 3}
+        m_Texture: {fileID: 2800000, guid: b49f1fc7daeb3934e9147a36aa071510, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _OcclusionMap:
