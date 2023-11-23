@@ -8,6 +8,8 @@ public class PuzzleSlot : MonoBehaviour, InteractableItemBase
 {
     [SerializeField]
     private string _prompt;
+    [SerializeField]
+    private string failPrompt;
 
     public string expectedItemTag;
     public Player player;
@@ -22,6 +24,8 @@ public class PuzzleSlot : MonoBehaviour, InteractableItemBase
     public bool hasInteracted = false;
 
     public bool Interacted => hasInteracted;
+
+    public Animator popupAnimator;
 
 
 
@@ -54,8 +58,13 @@ public class PuzzleSlot : MonoBehaviour, InteractableItemBase
         else
         {
             //trigger false animation/sound
-            Debug.Log("Missing item");
+            PopUp();
         }
+
+    }
+    public void PopUp()
+    {
+        //tmpText = failPrompt;
 
     }
    
