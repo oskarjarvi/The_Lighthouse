@@ -13,7 +13,6 @@ public class PlayerInteractions : MonoBehaviour
 {
     Player player;
     public Transform pickUpParent;
-    public LayerMask interactableLayerMask;
 
     public float maxInteractDistance;
     private InteractableItemBase _hitItem;
@@ -39,31 +38,40 @@ public class PlayerInteractions : MonoBehaviour
         RaycastHit hit;
         if (!_itemInspector.IsInspecting)
         {
+            //might have to do something here to avoid raycasting into picked up object.
+            // int playerLayer = LayerMask.NameToLayer("Player");
+            // int attachedObjectsLayer = LayerMask.NameToLayer("AttachedObjects");
 
+            //int layerMask = ~(1 << playerLayer | 1 << attachedObjectsLayer);
 
-            if (Physics.Raycast(ray, out hit, maxInteractDistance, interactableLayerMask))
+            if (Physics.Raycast(ray, out hit, maxInteractDistance))
             {
-                _hitItem = hit.collider.GetComponent<InteractableItemBase>();
-
-                _isHittingItem = true;
-
-
-                if (!_hitItem.Interacted && _isHittingItem)
+                if (hit.collider.gameObject.layer == LayerMask.NameToLayer("Interactable"))
                 {
-                    _interactionUIController.SetUp(_hitItem.InteractionPrompt);
+                    _hitItem = hit.collider.GetComponent<InteractableItemBase>();
+
+                    _isHittingItem = true;
+
+
+                    if (!_hitItem.Interacted && _isHittingItem)
+                    {
+                        _interactionUIController.SetUp(_hitItem.InteractionPrompt);
+                    }
                 }
+                else
+                {
+                    _isHittingItem = false;
+                    _interactionUIController.Close();
+                    _hitItem = null;
+                }
+
             }
 
-            else
-            {
-                _isHittingItem = false;
-                _interactionUIController.Close();
-                _hitItem = null;
-            }
+
         }
     }
-    
-  
+
+
 
 
     public void DropItem()

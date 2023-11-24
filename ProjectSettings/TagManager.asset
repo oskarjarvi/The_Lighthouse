@@ -6,6 +6,9 @@ TagManager:
   tags:
   - OutsideDoorKey
   - OfficeDoorKey
+  - DoorBlocker
+  - LighthouseOil
+  - LighthouseLens
   layers:
   - Default
   - TransparentFX

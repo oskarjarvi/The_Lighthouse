@@ -15,9 +15,14 @@ public class PuzzleItem : MonoBehaviour, InteractableItemBase
     public bool hasInteracted = false;
     public bool Interacted => hasInteracted;
 
+    private Vector3 originalScale;
+
     private void Awake()
     {
         _rb = GetComponent<Rigidbody>();
+
+        originalScale = transform.localScale;
+
     }
     public void Interact()
     {
@@ -32,19 +37,17 @@ public class PuzzleItem : MonoBehaviour, InteractableItemBase
     {
         player.heldItem = this;
 
-        Vector3 currentScale = transform.localScale;
-        Debug.Log(currentScale);
+
 
 
         transform.SetParent(heldItemSlot, false);
 
-        transform.localScale = currentScale;
         transform.localPosition = Vector3.zero;
         transform.localRotation = Quaternion.identity;
 
 
         rb.isKinematic = true;
-
+        // possibly set the layer to a "pickedUpObject" layer here
         if (player.GetComponent<Collider>() != null)
         {
             Physics.IgnoreCollision(player.GetComponent<Collider>(), GetComponent<Collider>(), true);
@@ -53,13 +56,10 @@ public class PuzzleItem : MonoBehaviour, InteractableItemBase
     }
     public void DropItem()
     {
-        Vector3 currentScale = transform.localScale;
 
-        // Set the parent to null (dropping the item)
         transform.SetParent(null);
 
-        // Reset the scale after setting the parent to null
-        transform.localScale = currentScale;
+        transform.localScale = originalScale;
 
         rb.isKinematic = false;
         rb.useGravity = true;
