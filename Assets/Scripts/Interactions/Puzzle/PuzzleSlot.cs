@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Pool;
+using TMPro;
 
 public class PuzzleSlot : MonoBehaviour, InteractableItemBase
 {
@@ -27,6 +28,10 @@ public class PuzzleSlot : MonoBehaviour, InteractableItemBase
     public bool Interacted => hasInteracted;
 
     public Animator popupAnimator;
+    public TMP_Text popUpText;
+    public GameObject popUpBox;
+
+    public float delay = 3f; 
 
 
 
@@ -73,8 +78,23 @@ public class PuzzleSlot : MonoBehaviour, InteractableItemBase
     }
     public void PopUp()
     {
-        //tmpText = failPrompt;
+        popUpBox.SetActive(true);
+        popUpText.text = failPrompt;
+
+        popupAnimator.SetTrigger("Show");
+
+        Invoke("ClosePopUp", delay);
 
     }
+    private void ClosePopUp() 
+    {
+        popupAnimator.SetTrigger("Hide");
 
+        Invoke("DeactivatePopupBox", 1f);
+    }
+    private void DeactivatePopupBox() 
+    {
+        popUpBox.SetActive(false);
+    }
+ 
 }
