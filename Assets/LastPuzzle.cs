@@ -55,7 +55,10 @@ public class LastPuzzle : MonoBehaviour, InteractableItemBase
             }
             else
             {
-                Debug.Log("You're using the wrong items bro");
+                
+                    PopupSystem ppSystem = player.GetComponent<PopupSystem>();
+                    ppSystem.PopUp(failPrompt);
+                
             }
         }
         

@@ -16,6 +16,7 @@ public class SequencePuzzleController : PuzzleBase
 
     public bool IsSequenceSensitive;
 
+    public string _failPrompt;
     
     public override bool IsSolved { get => _isPuzzleSolved; set => value = _isPuzzleSolved; }
 
@@ -34,7 +35,14 @@ public class SequencePuzzleController : PuzzleBase
 
     public override void ResetPuzzle()
     {
-        Debug.Log("resetting");
+        GameObject playerObject = GameObject.Find("Player");
+
+        if (playerObject != null)
+        {
+            PopupSystem ppSystem = playerObject.GetComponent<PopupSystem>();
+            ppSystem.PopUp(_failPrompt);
+        }
+
 
         foreach (PuzzleTrigger puzzleTrigger in playerTriggerSequence)
         {

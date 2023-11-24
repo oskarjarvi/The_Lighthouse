@@ -27,20 +27,16 @@ public class PuzzleSlot : MonoBehaviour, InteractableItemBase
 
     public bool Interacted => hasInteracted;
 
-    public Animator popupAnimator;
-    public TMP_Text popUpText;
-    public GameObject popUpBox;
+    private AudioSource audioSource;
 
-    public float delay = 3f; 
-
-
-
+    public float delay = 1f;
 
 
 
     private void Awake()
     {
         animator = GetComponent<Animator>();
+        audioSource = GetComponent<AudioSource>();
 
     }
     public void Interact()
@@ -60,9 +56,12 @@ public class PuzzleSlot : MonoBehaviour, InteractableItemBase
                 player.heldItem = null;
 
                 //Trigger animation
-                if (animator != null)
+                if (animator != null && audioSource != null)
                 {
                     animator.SetBool(animatorBool, true);
+                    Invoke("PlaySound", delay);
+
+                    
 
                 }
                 hasInteracted = true;
@@ -72,29 +71,15 @@ public class PuzzleSlot : MonoBehaviour, InteractableItemBase
         else
         {
             //trigger false animation/sound
-            PopUp();
+            PopupSystem ppSystem = player.GetComponent<PopupSystem>();
+            ppSystem.PopUp(failPrompt);
         }
 
     }
-    public void PopUp()
+    private void PlaySound()
     {
-        popUpBox.SetActive(true);
-        popUpText.text = failPrompt;
-
-        popupAnimator.SetTrigger("Show");
-
-        Invoke("ClosePopUp", delay);
-
+        audioSource.Play();
     }
-    private void ClosePopUp() 
-    {
-        popupAnimator.SetTrigger("Hide");
-
-        Invoke("DeactivatePopupBox", 1f);
-    }
-    private void DeactivatePopupBox() 
-    {
-        popUpBox.SetActive(false);
-    }
+    
  
 }

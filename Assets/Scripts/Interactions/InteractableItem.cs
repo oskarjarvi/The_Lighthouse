@@ -20,35 +20,70 @@ public class InteractableItem : MonoBehaviour, InteractableItemBase
 
     public bool Interacted => hasInteracted;
 
-    
+    private GameObject playerObject;
+
+    private PopupSystem ppSystem;
+
+    private AudioSource _audioSource;
+
+    public AudioClip _audioClip;
+
+    public float delay = 1f;
+
 
     private void Awake()
     {
         animator = GetComponent<Animator>();
-       
+        _audioSource = GetComponent<AudioSource>();
+
+        playerObject = GameObject.Find("Player");
+        if (playerObject != null)
+        {
+            ppSystem = playerObject.GetComponent<PopupSystem>();
+
+        }
     }
-    
+
     public void Interact()
     {
+        if (!isAnimationPaused)
+        {
+
+            animator.SetBool(animationBool, true);
+            Invoke("PlaySound", delay);
+
+        }
+        else
+        {
+            ppSystem.PopUp(_failPrompt);
+        }
+
+
         hasInteracted = true;
-        animator.SetBool(animationBool, true);
-      
+
     }
     void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("DoorBlocker"))
         {
-            Debug.Log("Collision with DoorBlocker detected");
+
+            if (playerObject != null)
+            {
+                ppSystem.PopUp(_failPrompt);
+            }
 
             // Pause the animation by setting the speed to 0
             if (!isAnimationPaused)
             {
                 animator.speed = 0f;
                 isAnimationPaused = true;
+                hasInteracted = false;
+
             }
         }
 
     }
+
     void OnTriggerExit(Collider other)
     {
         if (other.CompareTag("DoorBlocker"))
@@ -63,10 +98,10 @@ public class InteractableItem : MonoBehaviour, InteractableItemBase
             }
         }
     }
-
-
-
-   
-
+    private void PlaySound()
+    {
+        _audioSource.clip = _audioClip;
+        _audioSource.Play();
+    }
 
 }

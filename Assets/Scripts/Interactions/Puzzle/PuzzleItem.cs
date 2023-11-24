@@ -37,9 +37,6 @@ public class PuzzleItem : MonoBehaviour, InteractableItemBase
     {
         player.heldItem = this;
 
-
-
-
         transform.SetParent(heldItemSlot, false);
 
         transform.localPosition = Vector3.zero;

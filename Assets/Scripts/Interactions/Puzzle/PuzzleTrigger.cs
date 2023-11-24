@@ -21,12 +21,17 @@ public class PuzzleTrigger :MonoBehaviour, InteractableItemBase
 
     public bool Interacted => !_interactable;
 
+    private AudioSource _audioSource;
 
-  
+    public AudioClip _audioClip;
+
+    public float delay = 1f;
+
 
     public void Awake()
     {
         animator = GetComponent<Animator>();
+        _audioSource = GetComponent<AudioSource>();
 
 
     }
@@ -38,6 +43,9 @@ public class PuzzleTrigger :MonoBehaviour, InteractableItemBase
             controller.SequenceTrigger(this);
             animator.SetBool(animationBool, true);
 
+            Invoke("PlaySound", delay);
+            
+
             _interactable = false;
         }
     }
@@ -48,5 +56,10 @@ public class PuzzleTrigger :MonoBehaviour, InteractableItemBase
         _interactable = true;
 
     }
-   
+    private void PlaySound()
+    {
+        _audioSource.clip = _audioClip;
+        _audioSource.Play();
+    }
+
 }
