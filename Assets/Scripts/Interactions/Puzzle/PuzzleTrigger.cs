@@ -43,7 +43,7 @@ public class PuzzleTrigger :MonoBehaviour, InteractableItemBase
             controller.SequenceTrigger(this);
             animator.SetBool(animationBool, true);
 
-            Invoke("PlaySound", delay);
+            //Invoke("PlaySound", delay);
             
 
             _interactable = false;

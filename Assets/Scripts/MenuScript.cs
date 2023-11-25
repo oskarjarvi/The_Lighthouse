@@ -7,6 +7,9 @@ public class MenuScript : MonoBehaviour
 {
     public Animator fadeTransition;
     public float transitionTime = 1f;
+    [SerializeField]
+    private CursorManager cursorManager;
+
     public void PlayGame()
     {
         StartCoroutine(LoadLevel(SceneManager.GetActiveScene().buildIndex + 1));
@@ -19,13 +22,13 @@ public class MenuScript : MonoBehaviour
         yield return new WaitForSeconds(transitionTime);
 
         SceneManager.LoadScene(levelIndex);
+        cursorManager.SetCursorState(false);
+
     }
-
-
-
 
     public void QuitGame()
     {
         Application.Quit();
     }
+    
 }

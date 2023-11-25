@@ -15,7 +15,7 @@ public class PuzzleItem : MonoBehaviour, InteractableItemBase
     public bool hasInteracted = false;
     public bool Interacted => hasInteracted;
 
-    private Vector3 originalScale;
+    public Vector3 originalScale;
 
     private void Awake()
     {
@@ -35,6 +35,11 @@ public class PuzzleItem : MonoBehaviour, InteractableItemBase
     }
     private void PickUpItem()
     {
+        if (CompareTag("LighthouseLens"))
+        {
+            float LensScale = 20f;
+            transform.localScale = new Vector3(LensScale, LensScale, LensScale);
+        }
         player.heldItem = this;
 
         transform.SetParent(heldItemSlot, false);
@@ -53,11 +58,15 @@ public class PuzzleItem : MonoBehaviour, InteractableItemBase
     }
     public void DropItem()
     {
-
+        Collider itemCollider = GetComponent<Collider>();
         transform.SetParent(null);
 
         transform.localScale = originalScale;
 
+        if (itemCollider != null && itemCollider.isTrigger)
+        {
+            itemCollider.isTrigger = false;
+        }
         rb.isKinematic = false;
         rb.useGravity = true;
 

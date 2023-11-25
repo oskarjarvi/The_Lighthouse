@@ -9,6 +9,11 @@ ModelImporter:
       assembly: UnityEngine.CoreModule
       name: defaultMat
     second: {fileID: 2100000, guid: e5f970795c6eb4e4db04e04be21a0f19, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: initialShadingGroup
+    second: {fileID: 2100000, guid: e5f970795c6eb4e4db04e04be21a0f19, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

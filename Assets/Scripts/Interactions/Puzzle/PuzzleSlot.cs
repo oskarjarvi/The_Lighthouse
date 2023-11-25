@@ -11,6 +11,8 @@ public class PuzzleSlot : MonoBehaviour, InteractableItemBase
     private string _prompt;
     [SerializeField]
     private string failPrompt;
+    [SerializeField]
+    private string wrongItemPrompt;
 
     public string expectedItemTag;
 
@@ -29,7 +31,6 @@ public class PuzzleSlot : MonoBehaviour, InteractableItemBase
 
     private AudioSource audioSource;
 
-    public float delay = 1f;
 
 
 
@@ -41,6 +42,8 @@ public class PuzzleSlot : MonoBehaviour, InteractableItemBase
     }
     public void Interact()
     {
+        PopupSystem ppSystem = player.GetComponent<PopupSystem>();
+
         if (player.heldItem != null)
         {
 
@@ -50,6 +53,7 @@ public class PuzzleSlot : MonoBehaviour, InteractableItemBase
                 PuzzleItem item = player.heldItem.GetComponent<PuzzleItem>();
 
                 item.hasInteracted = true;
+
                 item.transform.SetParent(expectedItemSlot, false);
 
 
@@ -58,20 +62,20 @@ public class PuzzleSlot : MonoBehaviour, InteractableItemBase
                 //Trigger animation
                 if (animator != null && audioSource != null)
                 {
-                    animator.SetBool(animatorBool, true);
-                    Invoke("PlaySound", delay);
-
-                    
+                    animator.SetBool(animatorBool, true);                    
 
                 }
-                hasInteracted = true;
+            }
+            else
+            {
+                ppSystem.PopUp(wrongItemPrompt);
+
             }
         }
 
         else
         {
             //trigger false animation/sound
-            PopupSystem ppSystem = player.GetComponent<PopupSystem>();
             ppSystem.PopUp(failPrompt);
         }
 

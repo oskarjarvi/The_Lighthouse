@@ -7,12 +7,15 @@ public class PauseScript : MonoBehaviour
     public GameObject pauseMenu;
     public bool isPaused;
 
+    [SerializeField]
+    private CursorManager cursorManager;
+
     void Start()
     {
         pauseMenu.SetActive(false);
     }
 
-    
+
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
@@ -20,10 +23,10 @@ public class PauseScript : MonoBehaviour
             if (isPaused)
             {
                 ResumeGame();
-            
             }
             else
             {
+
                 PauseGame();
             }
         }
@@ -34,13 +37,15 @@ public class PauseScript : MonoBehaviour
         pauseMenu.SetActive(true);
         Time.timeScale = 0f;
         isPaused = true;
+        cursorManager.SetCursorState(true);
     }
 
-    public void ResumeGame() 
+    public void ResumeGame()
     {
         pauseMenu.SetActive(false);
         Time.timeScale = 1f;
         isPaused = false;
+        cursorManager.SetCursorState(false);
     }
 
     public void QuitGame()

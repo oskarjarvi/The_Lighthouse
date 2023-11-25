@@ -13,30 +13,13 @@ public class CameraController : MonoBehaviour
     [SerializeField] Transform playerBody;
     [SerializeField] Transform lantern;
 
-    private ItemInspector itemInspector;
 
     float xRotation = 0f;
-    //private Vector3 lanternOffset;
+    
 
     private void Awake()
     {
-        itemInspector = GetComponent<ItemInspector>();
         Cursor.lockState = CursorLockMode.Locked;
-
-        //lanternOffset = lantern.position - playerCamera.transform.position;
-
-    }
-    private void Update()
-    {
-
-        if (itemInspector.IsInspecting)
-        {
-            Cursor.lockState = CursorLockMode.None;
-        }
-        else
-        {
-            Cursor.lockState = CursorLockMode.Locked;
-        }
     }
 
     public void HandleCameraMovement(Vector2 mouselookPos)

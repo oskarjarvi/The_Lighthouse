@@ -50,7 +50,7 @@ public class InteractableItem : MonoBehaviour, InteractableItemBase
         {
 
             animator.SetBool(animationBool, true);
-            Invoke("PlaySound", delay);
+            //Invoke("PlaySound", delay);
 
         }
         else
@@ -66,6 +66,7 @@ public class InteractableItem : MonoBehaviour, InteractableItemBase
     {
         if (other.CompareTag("DoorBlocker"))
         {
+            _audioSource.Stop();
 
             if (playerObject != null)
             {
@@ -78,6 +79,7 @@ public class InteractableItem : MonoBehaviour, InteractableItemBase
                 animator.speed = 0f;
                 isAnimationPaused = true;
                 hasInteracted = false;
+                animator.SetBool(animationBool, false);
 
             }
         }
@@ -93,6 +95,7 @@ public class InteractableItem : MonoBehaviour, InteractableItemBase
             // Resume the animation by setting the speed back to 1
             if (isAnimationPaused)
             {
+                _audioSource.Play();
                 animator.speed = 1f;
                 isAnimationPaused = false;
             }

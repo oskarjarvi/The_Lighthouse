@@ -17,9 +17,16 @@ public class SequencePuzzleController : PuzzleBase
     public bool IsSequenceSensitive;
 
     public string _failPrompt;
+
+    private AudioSource _audioSource;
     
     public override bool IsSolved { get => _isPuzzleSolved; set => value = _isPuzzleSolved; }
 
+    
+    private void Awake()
+    {
+        _audioSource = GetComponent<AudioSource>();
+    }
     public override void StartPuzzle()
     {
 
@@ -30,7 +37,10 @@ public class SequencePuzzleController : PuzzleBase
         _isPuzzleSolved = true;
         Debug.Log("yay you unlocked the door");
         puzzleGoal.GetComponent<Animator>().SetBool("puzzleSolved", _isPuzzleSolved);
-
+    }
+    public void PlayAudio()
+    {
+        _audioSource.Play();
     }
 
     public override void ResetPuzzle()
@@ -85,8 +95,7 @@ public class SequencePuzzleController : PuzzleBase
 
             for (int i = 0;i < playerTriggerSequence.Count;i++)
             {
-                Debug.Log(playerTriggerSequence[i].triggerIndex);
-                Debug.Log(puzzleTriggerIndexList[i]);
+               
                 if (!puzzleTriggerIndexList.Contains(playerTriggerSequence[i].triggerIndex))
                 {
 
