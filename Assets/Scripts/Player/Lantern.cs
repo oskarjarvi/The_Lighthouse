@@ -23,7 +23,7 @@ public class Lantern : MonoBehaviour
 
                 lanternLight.transform.SetParent(lanternSlot, false);
 
-                lanternLight.intensity += 0.5f;
+                lanternLight.intensity += 19.5f;
             }
             else
             {

@@ -18,6 +18,8 @@ public class LastPuzzle : MonoBehaviour, InteractableItemBase
 
     public GameObject goalObject;
 
+    public GameObject fireObject;
+
     public Rigidbody rb => null;
 
     public string _prompt;
@@ -75,11 +77,17 @@ public class LastPuzzle : MonoBehaviour, InteractableItemBase
         }
 
     }
+
+
     private void Update()
     {
         if (isPuzzleSlot1Filled && isPuzzleSlot2Filled)
         {
             goalObject.SetActive(true);
+        }
+        if (isPuzzleSlot2Filled)
+        {
+            fireObject.SetActive(true);
         }
     }
 }
