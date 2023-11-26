@@ -40,6 +40,7 @@ public class PuzzleItem : MonoBehaviour, InteractableItemBase
             float LensScale = 20f;
             transform.localScale = new Vector3(LensScale, LensScale, LensScale);
         }
+
         player.heldItem = this;
 
         transform.SetParent(heldItemSlot, false);

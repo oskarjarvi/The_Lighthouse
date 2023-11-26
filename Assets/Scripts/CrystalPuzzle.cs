@@ -15,5 +15,9 @@ public class CrystalPuzzle : MonoBehaviour
         {
             runeMaterial.EnableKeyword("_EMISSION");
         }
+        else
+        {
+            runeMaterial.DisableKeyword("_EMISSION");
+        }
     }
 }
