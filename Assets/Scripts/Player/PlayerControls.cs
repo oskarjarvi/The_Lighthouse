@@ -262,6 +262,34 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""UiControls"",
+            ""id"": ""b2dc8897-eaab-45aa-a432-ed285a07eda7"",
+            ""actions"": [
+                {
+                    ""name"": ""TogglePause"",
+                    ""type"": ""Button"",
+                    ""id"": ""e77fcdcc-3e0c-4f5e-bb65-be8b0399dfc4"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""cea85c16-d5c7-4823-858d-183be94f2aba"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""TogglePause"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": []
@@ -279,6 +307,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         m_PlayerInspect_Rotating = m_PlayerInspect.FindAction("Rotating", throwIfNotFound: true);
         m_PlayerInspect_Cancel = m_PlayerInspect.FindAction("Cancel", throwIfNotFound: true);
         m_PlayerInspect_ToggleText = m_PlayerInspect.FindAction("ToggleText", throwIfNotFound: true);
+        // UiControls
+        m_UiControls = asset.FindActionMap("UiControls", throwIfNotFound: true);
+        m_UiControls_TogglePause = m_UiControls.FindAction("TogglePause", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -484,6 +515,52 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         }
     }
     public PlayerInspectActions @PlayerInspect => new PlayerInspectActions(this);
+
+    // UiControls
+    private readonly InputActionMap m_UiControls;
+    private List<IUiControlsActions> m_UiControlsActionsCallbackInterfaces = new List<IUiControlsActions>();
+    private readonly InputAction m_UiControls_TogglePause;
+    public struct UiControlsActions
+    {
+        private @PlayerControls m_Wrapper;
+        public UiControlsActions(@PlayerControls wrapper) { m_Wrapper = wrapper; }
+        public InputAction @TogglePause => m_Wrapper.m_UiControls_TogglePause;
+        public InputActionMap Get() { return m_Wrapper.m_UiControls; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(UiControlsActions set) { return set.Get(); }
+        public void AddCallbacks(IUiControlsActions instance)
+        {
+            if (instance == null || m_Wrapper.m_UiControlsActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_UiControlsActionsCallbackInterfaces.Add(instance);
+            @TogglePause.started += instance.OnTogglePause;
+            @TogglePause.performed += instance.OnTogglePause;
+            @TogglePause.canceled += instance.OnTogglePause;
+        }
+
+        private void UnregisterCallbacks(IUiControlsActions instance)
+        {
+            @TogglePause.started -= instance.OnTogglePause;
+            @TogglePause.performed -= instance.OnTogglePause;
+            @TogglePause.canceled -= instance.OnTogglePause;
+        }
+
+        public void RemoveCallbacks(IUiControlsActions instance)
+        {
+            if (m_Wrapper.m_UiControlsActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        public void SetCallbacks(IUiControlsActions instance)
+        {
+            foreach (var item in m_Wrapper.m_UiControlsActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_UiControlsActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    public UiControlsActions @UiControls => new UiControlsActions(this);
     public interface IPlayerMovementActions
     {
         void OnWalking(InputAction.CallbackContext context);
@@ -498,5 +575,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         void OnRotating(InputAction.CallbackContext context);
         void OnCancel(InputAction.CallbackContext context);
         void OnToggleText(InputAction.CallbackContext context);
+    }
+    public interface IUiControlsActions
+    {
+        void OnTogglePause(InputAction.CallbackContext context);
     }
 }

@@ -5,11 +5,9 @@ using UnityEngine;
 
 public class CursorManager : MonoBehaviour
 {
-    public event Action<bool> OnCursorStateChanged;
 
     private void Awake()
     {
-        // Initial state (unlocked by default)
         SetCursorState(true);
     }
 
@@ -18,8 +16,7 @@ public class CursorManager : MonoBehaviour
         Cursor.lockState = isUnlocked ? CursorLockMode.None : CursorLockMode.Locked;
         Cursor.visible = isUnlocked;
 
-        // Notify subscribers about the cursor state change
-        OnCursorStateChanged?.Invoke(isUnlocked);
+       
     }
    
 }

@@ -13,6 +13,8 @@ public class PlayerInput : MonoBehaviour
     private CameraController cameraController;
     private ItemInspector itemInspector;
 
+    public PauseScript pauseManager;
+
     private void Awake()
     {
         playerControls = new PlayerControls();
@@ -21,6 +23,7 @@ public class PlayerInput : MonoBehaviour
         lanternHandler = GetComponent<Lantern>();
         cameraController = GetComponent<CameraController>();
         itemInspector = GetComponent<ItemInspector>();
+
 
         playerControls.PlayerInspect.Rotate.started += StartRotation;
 
@@ -32,6 +35,8 @@ public class PlayerInput : MonoBehaviour
 
         playerControls.PlayerInspect.ToggleText.performed += HandleToggleText;
 
+        playerControls.UiControls.TogglePause.performed += HandleTogglePause;
+
     }
 
     private void OnEnable()
@@ -41,7 +46,7 @@ public class PlayerInput : MonoBehaviour
         playerControls.PlayerMovement.Walking.Enable();
         playerControls.PlayerMovement.Lighting.Enable();
         playerControls.PlayerMovement.Look.Enable();
-
+        playerControls.UiControls.Enable();
     }
 
     private void OnDisable()
@@ -52,24 +57,39 @@ public class PlayerInput : MonoBehaviour
         playerControls.PlayerMovement.Walking.Disable();
         playerControls.PlayerMovement.Lighting.Disable();
         playerControls.PlayerMovement.Look.Disable();
-
+        playerControls.UiControls.Disable();
 
     }
 
     private void Update()
     {
+        if(pauseManager.isPaused)
+        {
+
+            playerControls.PlayerMovement.Disable();
+            playerControls.PlayerInspect.Disable();
+        }
+        else
+        {
+            playerControls.PlayerMovement.Enable();
+            playerControls.PlayerInspect.Enable();
+        }
         HandleLantern();
         HandleInteract();
         HandleMovement();
         HandleDropItem();
         HandleCamera();
+        
         if (itemInspector.IsInspecting)
         {
+            playerControls.UiControls.Disable();
             playerControls.PlayerMovement.Disable();
             playerControls.PlayerInspect.Enable();
         }
         else
         {
+            playerControls.UiControls.Enable();
+
             playerControls.PlayerInspect.Disable();
             playerControls.PlayerMovement.Enable();
 
@@ -77,10 +97,14 @@ public class PlayerInput : MonoBehaviour
     }
     private void HandleLantern()
     {
-        if(playerControls.PlayerMovement.Lighting.triggered)
+        if (playerControls.PlayerMovement.Lighting.triggered)
         {
             lanternHandler.HandleLantern();
         }
+    }
+    private void HandleTogglePause(InputAction.CallbackContext context)
+    {
+        pauseManager.TogglePause();
     }
 
     private void HandleMovement()
@@ -90,7 +114,7 @@ public class PlayerInput : MonoBehaviour
     }
     private void HandleCamera()
     {
-         Vector2 mouseCamPos= playerControls.PlayerMovement.Look.ReadValue<Vector2>();
+        Vector2 mouseCamPos = playerControls.PlayerMovement.Look.ReadValue<Vector2>();
         cameraController.HandleCameraMovement(mouseCamPos);
     }
 
@@ -109,14 +133,16 @@ public class PlayerInput : MonoBehaviour
     }
     private void StartRotation(InputAction.CallbackContext context)
     {
-        itemInspector.StartRotation();
-        Debug.Log("I started inspecting ");
+        if (!itemInspector.isTextVisible)
+        {
+            itemInspector.StartRotation();
+
+        }
 
     }
     private void StopRotation(InputAction.CallbackContext context)
     {
         itemInspector.StopRotation();
-        Debug.Log("I cancelled inspecting ");
 
     }
 

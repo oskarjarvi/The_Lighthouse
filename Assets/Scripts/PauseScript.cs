@@ -14,22 +14,19 @@ public class PauseScript : MonoBehaviour
     {
         pauseMenu.SetActive(false);
     }
-
-
-    void Update()
+    public void TogglePause()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (isPaused)
         {
-            if (isPaused)
-            {
-                ResumeGame();
-            }
-            else
-            {
-
-                PauseGame();
-            }
+            ResumeGame();
         }
+        else
+        {
+
+            PauseGame();
+        }
+
+
     }
 
     public void PauseGame()
@@ -38,6 +35,7 @@ public class PauseScript : MonoBehaviour
         Time.timeScale = 0f;
         isPaused = true;
         cursorManager.SetCursorState(true);
+
     }
 
     public void ResumeGame()

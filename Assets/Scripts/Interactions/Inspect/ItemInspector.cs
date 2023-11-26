@@ -22,6 +22,10 @@ public class ItemInspector : MonoBehaviour
     [SerializeField]
     InteractionUIController _interactionUIController;
 
+    [SerializeField]
+    CursorManager cursorManager;
+
+    public bool isTextVisible = false;
 
 
 
@@ -29,13 +33,17 @@ public class ItemInspector : MonoBehaviour
     {
         _isInspecting = true;
         Quaternion rotation = Quaternion.Euler(90f, 180f, 0f);
-
+        if(cursorManager != null )
+        {
+            cursorManager.SetCursorState(true);
+        }
 
         item.rb.useGravity = false;
 
         inspectionCanvas.gameObject.SetActive(true);
         inspectCamera.gameObject.SetActive(true);
         inspectGUI.SetActive(true);
+
 
         selectedPrefab = Instantiate(item.transform, inspectCamera.transform.position + inspectCamera.transform.forward * 1f, rotation);
 
@@ -55,7 +63,7 @@ public class ItemInspector : MonoBehaviour
         if (tempVar != null && tempVar.page != null)
         {
             tempVar.page.SetActive(!tempVar.page.activeSelf);
-
+            isTextVisible = !isTextVisible;
         }
     }
 
@@ -70,12 +78,9 @@ public class ItemInspector : MonoBehaviour
     {
         if (_isRotating)
         {
-            Debug.Log(mouseInput);
 
             Vector3 rotationAmount = new Vector3(mouseInput.y, -mouseInput.x, 0) * rotationSpeed * Time.deltaTime;
             selectedPrefab.transform.Rotate(rotationAmount, Space.World);
-
-
         }
     }
     public void StopRotation()
@@ -85,8 +90,12 @@ public class ItemInspector : MonoBehaviour
     }
     public void CancelInspection()
     {
-        inspectGUI.SetActive(false);
 
+        inspectGUI.SetActive(false);
+        if (cursorManager != null)
+        {
+            cursorManager.SetCursorState(false);
+        }
         _isInspecting = false;
         inspectionCanvas.gameObject.SetActive(false);
 
