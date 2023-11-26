@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 45b913d793bc4c64ab51c92eb7df5c27
+guid: 879cc696c5450144e82e08f2c1944fa0
 ModelImporter:
   serializedVersion: 21300
   internalIDToNameTable: []
@@ -7,13 +7,13 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: glasspart
-    second: {fileID: 2100000, guid: c0393a8b89522de4780cc411f30177ec, type: 2}
+      name: lambert41
+    second: {fileID: 2100000, guid: 01a64adb3ec02eb4b80cf8b8839d4276, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: standpart
-    second: {fileID: 2100000, guid: aeb1143b2f5db38478c0698b290e12f3, type: 2}
+      name: stand
+    second: {fileID: 2100000, guid: 06ed5e53a24d5714c935f474919333be, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
@@ -98,7 +98,7 @@ ModelImporter:
     armStretch: 0.05
     legStretch: 0.05
     feetSpacing: 0
-    globalScale: 1
+    globalScale: 100
     rootMotionBoneName: 
     hasTranslationDoF: 0
     hasExtraRoot: 0
