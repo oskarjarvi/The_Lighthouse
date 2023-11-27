@@ -25,6 +25,8 @@ public class LastPuzzle : MonoBehaviour, InteractableItemBase
     public string _prompt;
 
     public string failPrompt;
+    private PopupSystem ppSystem;
+
 
 
     public string InteractionPrompt => _prompt;
@@ -35,9 +37,12 @@ public class LastPuzzle : MonoBehaviour, InteractableItemBase
 
     public Animator popupAnimator;
 
+    private void Awake()
+    {
+        ppSystem = player.GetComponent<PopupSystem>();
+    }
     public void Interact()
     {
-        PopupSystem ppSystem = player.GetComponent<PopupSystem>();
 
         if (player != null && player.heldItem != null)
         {
@@ -57,6 +62,10 @@ public class LastPuzzle : MonoBehaviour, InteractableItemBase
                     targetSlot = puzzlePieceTwoSlot;
                     isPuzzleSlot2Filled = true;
                 }
+                else
+                {
+                    ppSystem.PopUp("There's something else that fits here");
+                }
                 if (targetSlot != null)
                 {
                     item.transform.localScale = item.originalScale;
@@ -64,16 +73,16 @@ public class LastPuzzle : MonoBehaviour, InteractableItemBase
                     item.hasInteracted = true;
                     player.heldItem = null;
                 }
-                else
-                {
-                    ppSystem.PopUp("There's something else that fits here");
-                }
             }
 
             else
             {
                 ppSystem.PopUp(failPrompt);
             }
+        }
+        else
+        {
+            ppSystem.PopUp("It looks like some items are missing");
         }
 
     }
@@ -84,6 +93,7 @@ public class LastPuzzle : MonoBehaviour, InteractableItemBase
         if (isPuzzleSlot1Filled && isPuzzleSlot2Filled)
         {
             goalObject.SetActive(true);
+            ppSystem.PopUp("It lit up! I wonder where it leads? I should head down and investigate");
         }
         if (isPuzzleSlot2Filled)
         {
