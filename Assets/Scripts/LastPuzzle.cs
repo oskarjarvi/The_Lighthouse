@@ -15,6 +15,8 @@ public class LastPuzzle : MonoBehaviour, InteractableItemBase
     private bool isPuzzleSlot1Filled = false;
     private bool isPuzzleSlot2Filled = false;
 
+    private bool hasPrompted = false;
+
 
     public GameObject goalObject;
 
@@ -90,10 +92,11 @@ public class LastPuzzle : MonoBehaviour, InteractableItemBase
 
     private void Update()
     {
-        if (isPuzzleSlot1Filled && isPuzzleSlot2Filled)
+        if (isPuzzleSlot1Filled && isPuzzleSlot2Filled && !hasPrompted)
         {
             goalObject.SetActive(true);
             ppSystem.PopUp("It lit up! I wonder where it leads? I should head down and investigate");
+            hasPrompted = true;
         }
         if (isPuzzleSlot2Filled)
         {
