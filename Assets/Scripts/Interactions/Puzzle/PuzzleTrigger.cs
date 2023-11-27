@@ -61,5 +61,9 @@ public class PuzzleTrigger :MonoBehaviour, InteractableItemBase
         _audioSource.clip = _audioClip;
         _audioSource.Play();
     }
+    private void StopSound()
+    {
+        _audioSource.Stop();
+    }
 
 }

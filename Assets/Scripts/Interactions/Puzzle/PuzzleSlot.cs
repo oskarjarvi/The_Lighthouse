@@ -84,6 +84,10 @@ public class PuzzleSlot : MonoBehaviour, InteractableItemBase
     {
         audioSource.Play();
     }
-    
- 
+    private void StopSound()
+    {
+        audioSource.Stop();
+    }
+
+
 }

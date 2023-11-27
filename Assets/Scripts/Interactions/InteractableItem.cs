@@ -30,6 +30,9 @@ public class InteractableItem : MonoBehaviour, InteractableItemBase
 
     public float delay = 1f;
 
+    public Camera _deathCamera;
+    public Camera currentCamera;
+
 
     private void Awake()
     {
@@ -90,9 +93,7 @@ public class InteractableItem : MonoBehaviour, InteractableItemBase
     {
         if (other.CompareTag("DoorBlocker"))
         {
-            Debug.Log("Exited collision with DoorBlocker");
 
-            // Resume the animation by setting the speed back to 1
             if (isAnimationPaused)
             {
                 _audioSource.Play();
@@ -105,6 +106,23 @@ public class InteractableItem : MonoBehaviour, InteractableItemBase
     {
         _audioSource.clip = _audioClip;
         _audioSource.Play();
+    }
+    private void StopSound()
+    {
+        _audioSource.Stop();
+    }
+    private void TriggerLastCamera()
+    {
+
+        _deathCamera.gameObject.SetActive(true);
+
+        currentCamera.enabled= false;
+
+        if (playerObject != null)
+        {
+            Destroy(playerObject);
+        }
+        _deathCamera.GetComponent<Animator>().SetTrigger("startEndAnim");
     }
 
 }

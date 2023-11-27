@@ -26,14 +26,15 @@ public class ItemInspector : MonoBehaviour
     CursorManager cursorManager;
 
     public bool isTextVisible = false;
-
+    private InspectableItem selectedItem;
+    
 
 
     public void StartInspectItem(InspectableItem item)
     {
         _isInspecting = true;
         Quaternion rotation = Quaternion.Euler(90f, 180f, 0f);
-        if(cursorManager != null )
+        if (cursorManager != null)
         {
             cursorManager.SetCursorState(true);
         }
@@ -55,15 +56,17 @@ public class ItemInspector : MonoBehaviour
         }
         _interactionUIController.gameObject.SetActive(false);
 
+        selectedItem = selectedPrefab.GetComponent<InspectableItem>();
+
     }
     public void ToggleText()
     {
-        InspectableItem tempVar = selectedPrefab.GetComponent<InspectableItem>();
 
-        if (tempVar != null && tempVar.page != null)
+        if (selectedItem != null && selectedItem.page != null)
         {
-            tempVar.page.SetActive(!tempVar.page.activeSelf);
+            selectedItem.page.SetActive(!selectedItem.page.activeSelf);
             isTextVisible = !isTextVisible;
+
         }
     }
 
@@ -96,12 +99,15 @@ public class ItemInspector : MonoBehaviour
         {
             cursorManager.SetCursorState(false);
         }
+        selectedItem.page.SetActive(false);
+        isTextVisible = false;
+
         _isInspecting = false;
         inspectionCanvas.gameObject.SetActive(false);
 
         inspectCamera.gameObject.SetActive(false);
         Destroy(selectedPrefab.gameObject);
         _interactionUIController.gameObject.SetActive(true);
-        
+
     }
 }

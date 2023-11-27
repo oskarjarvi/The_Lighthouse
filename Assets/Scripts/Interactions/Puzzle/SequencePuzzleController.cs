@@ -35,14 +35,16 @@ public class SequencePuzzleController : PuzzleBase
     public override void SolvePuzzle()
     {
         _isPuzzleSolved = true;
-        Debug.Log("yay you unlocked the door");
         puzzleGoal.GetComponent<Animator>().SetBool("puzzleSolved", _isPuzzleSolved);
     }
     public void PlayAudio()
     {
         _audioSource.Play();
     }
-
+    private void StopSound()
+    {
+        _audioSource.Stop();
+    }
     public override void ResetPuzzle()
     {
         GameObject playerObject = GameObject.Find("Player");

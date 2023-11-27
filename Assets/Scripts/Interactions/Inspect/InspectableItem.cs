@@ -16,7 +16,7 @@ public class InspectableItem : MonoBehaviour, InteractableItemBase
 
     public bool Interacted => false;
 
-
+    private AudioSource _audioSource;
 
 
     public GameObject page;
@@ -25,6 +25,8 @@ public class InspectableItem : MonoBehaviour, InteractableItemBase
     {
        
         GameObject playerObject = GameObject.Find("Player");
+
+        _audioSource = GetComponent<AudioSource>();
 
         if (playerObject != null)
         {
@@ -36,7 +38,7 @@ public class InspectableItem : MonoBehaviour, InteractableItemBase
         if(inspector != null)
         {
             inspector.StartInspectItem(this);
-
+            _audioSource.Play();
         }
 
     }
