@@ -122,7 +122,7 @@ public class InteractableItem : MonoBehaviour, InteractableItemBase
         {
             Destroy(playerObject);
         }
-        _deathCamera.GetComponent<Animator>().SetTrigger("startEndAnim");
+        _deathCamera.GetComponent<Animator>().SetTrigger("StartEndAnim");
     }
 
 }
