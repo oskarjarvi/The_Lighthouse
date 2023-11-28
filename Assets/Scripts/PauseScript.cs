@@ -10,6 +10,8 @@ public class PauseScript : MonoBehaviour
 
     [SerializeField]
     private CursorManager cursorManager;
+    [SerializeField]
+    private GameObject interactionCanvas;
 
     void Start()
     {
@@ -36,7 +38,7 @@ public class PauseScript : MonoBehaviour
         Time.timeScale = 0f;
         isPaused = true;
         cursorManager.SetCursorState(true);
-
+        interactionCanvas.SetActive(false);
     }
 
     public void ResumeGame()
@@ -45,6 +47,7 @@ public class PauseScript : MonoBehaviour
         Time.timeScale = 1f;
         isPaused = false;
         cursorManager.SetCursorState(false);
+        interactionCanvas.SetActive(true);
     }
 
     public void ExitGame()
@@ -54,6 +57,7 @@ public class PauseScript : MonoBehaviour
 
     void LoadMainMenu()
     {
+        Time.timeScale = 1f;
         SceneManager.LoadScene("Menu");
         cursorManager.SetCursorState(false);
     }

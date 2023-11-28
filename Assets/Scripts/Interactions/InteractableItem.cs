@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class InteractableItem : MonoBehaviour, InteractableItemBase
 {
@@ -122,7 +123,13 @@ public class InteractableItem : MonoBehaviour, InteractableItemBase
         {
             Destroy(playerObject);
         }
-        _deathCamera.GetComponent<Animator>().SetTrigger("StartEndAnim");
+
+
+    }
+
+    private void ResetGame()
+    {
+        SceneManager.LoadScene("Menu");
     }
 
 }
