@@ -48,6 +48,7 @@ public class PlayerInteractions : MonoBehaviour
             {
                 if (hit.collider.gameObject.layer == LayerMask.NameToLayer("Interactable"))
                 {
+
                     _hitItem = hit.collider.GetComponent<InteractableItemBase>();
 
                     _isHittingItem = true;

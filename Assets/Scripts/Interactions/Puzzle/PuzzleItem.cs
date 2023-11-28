@@ -50,33 +50,37 @@ public class PuzzleItem : MonoBehaviour, InteractableItemBase
 
 
         rb.isKinematic = true;
-        // possibly set the layer to a "pickedUpObject" layer here
-        if (player.GetComponent<Collider>() != null)
+
+        Collider itemCollider = GetComponent<Collider>();
+
+        if (itemCollider != null)
         {
-            Physics.IgnoreCollision(player.GetComponent<Collider>(), GetComponent<Collider>(), true);
+            itemCollider.enabled = false;
         }
 
     }
     public void DropItem()
     {
         Collider itemCollider = GetComponent<Collider>();
-        transform.SetParent(null);
 
+
+
+        if (itemCollider != null)
+        {
+            itemCollider.enabled = true;
+            if(itemCollider.isTrigger)
+            {
+                itemCollider.isTrigger = false;
+
+            }
+
+        }
+        transform.SetParent(null);
         transform.localScale = originalScale;
 
-        if (itemCollider != null && itemCollider.isTrigger)
-        {
-            itemCollider.isTrigger = false;
-        }
         rb.isKinematic = false;
         rb.useGravity = true;
 
-
-        if (player != null)
-        {
-            Physics.IgnoreCollision(player.GetComponent<Collider>(), GetComponent<Collider>(), false);
-
-        }
 
         player.heldItem = null;
     }
