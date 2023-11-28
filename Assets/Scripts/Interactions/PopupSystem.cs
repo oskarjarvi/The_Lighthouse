@@ -10,7 +10,7 @@ public class PopupSystem : MonoBehaviour
     public TMP_Text popUpText;
     public GameObject popUpBox;
 
-    public float delay = 3f;
+    public float delay = 1f;
 
 
 
@@ -28,7 +28,7 @@ public class PopupSystem : MonoBehaviour
     {
         popupAnimator.SetTrigger("Hide");
 
-        Invoke("DeactivatePopupBox", 1f);
+        Invoke("DeactivatePopupBox", delay);
     }
     private void DeactivatePopupBox()
     {

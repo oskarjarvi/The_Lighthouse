@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PauseScript : MonoBehaviour
 {
@@ -46,9 +47,15 @@ public class PauseScript : MonoBehaviour
         cursorManager.SetCursorState(false);
     }
 
-    public void QuitGame()
+    public void ExitGame()
     {
-        Application.Quit();
+        LoadMainMenu();
+    }
+
+    void LoadMainMenu()
+    {
+        SceneManager.LoadScene("Menu");
+        cursorManager.SetCursorState(false);
     }
 }
 
