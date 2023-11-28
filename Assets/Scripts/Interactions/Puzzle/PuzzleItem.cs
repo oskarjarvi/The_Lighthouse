@@ -37,7 +37,7 @@ public class PuzzleItem : MonoBehaviour, InteractableItemBase
     {
         if (CompareTag("LighthouseLens"))
         {
-            float LensScale = 20f;
+            float LensScale = 15f;
             transform.localScale = new Vector3(LensScale, LensScale, LensScale);
         }
 
