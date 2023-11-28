@@ -43,7 +43,6 @@ public class PuzzleTrigger :MonoBehaviour, InteractableItemBase
             controller.SequenceTrigger(this);
             animator.SetBool(animationBool, true);
 
-            //Invoke("PlaySound", delay);
             
 
             _interactable = false;
@@ -51,7 +50,6 @@ public class PuzzleTrigger :MonoBehaviour, InteractableItemBase
     }
     public void Reset()
     {
-        Debug.Log("resetting" + this.gameObject);
         animator.SetBool(animationBool, false);
         _interactable = true;
 
