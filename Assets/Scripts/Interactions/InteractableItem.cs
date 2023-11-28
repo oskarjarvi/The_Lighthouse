@@ -76,16 +76,17 @@ public class InteractableItem : MonoBehaviour, InteractableItemBase
             {
                 ppSystem.PopUp(_failPrompt);
             }
-
+            hasInteracted = false;
             // Pause the animation by setting the speed to 0
             if (!isAnimationPaused)
             {
                 animator.speed = 0f;
                 isAnimationPaused = true;
-                hasInteracted = false;
+
                 animator.SetBool(animationBool, false);
 
             }
+            
         }
 
     }
