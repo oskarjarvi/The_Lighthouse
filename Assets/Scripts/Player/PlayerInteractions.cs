@@ -38,11 +38,6 @@ public class PlayerInteractions : MonoBehaviour
         RaycastHit hit;
         if (!_itemInspector.IsInspecting)
         {
-            //might have to do something here to avoid raycasting into picked up object.
-            // int playerLayer = LayerMask.NameToLayer("Player");
-            // int attachedObjectsLayer = LayerMask.NameToLayer("AttachedObjects");
-
-            //int layerMask = ~(1 << playerLayer | 1 << attachedObjectsLayer);
 
             if (Physics.Raycast(ray, out hit, maxInteractDistance))
             {

@@ -39,6 +39,13 @@ public class PuzzleItem : MonoBehaviour, InteractableItemBase
         {
             float LensScale = 15f;
             transform.localScale = new Vector3(LensScale, LensScale, LensScale);
+
+            Collider itemCollider = GetComponent<Collider>();
+
+            if (itemCollider != null)
+            {
+                itemCollider.enabled = false;
+            }
         }
 
         player.heldItem = this;
@@ -51,12 +58,7 @@ public class PuzzleItem : MonoBehaviour, InteractableItemBase
 
         rb.isKinematic = true;
 
-        Collider itemCollider = GetComponent<Collider>();
-
-        if (itemCollider != null)
-        {
-            itemCollider.enabled = false;
-        }
+       
 
     }
     public void DropItem()

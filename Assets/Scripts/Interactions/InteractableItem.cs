@@ -12,7 +12,7 @@ public class InteractableItem : MonoBehaviour, InteractableItemBase
     [SerializeField]
     private string _failPrompt;
 
-    private bool isAnimationPaused = false;
+    private bool isBlocked = false;
 
     public Rigidbody rb => null;
 
@@ -48,62 +48,49 @@ public class InteractableItem : MonoBehaviour, InteractableItemBase
         }
     }
 
+
     public void Interact()
     {
-        if (!isAnimationPaused)
+        // If the door hasn't collided with anything, do this
+        if (!isBlocked)
         {
-
+            _audioSource.Play();
+            animator.speed = 1f;
             animator.SetBool(animationBool, true);
-            //Invoke("PlaySound", delay);
-
         }
-        else
+        // If the door has collided with things and haven't gone into this statement before
+        else if (isBlocked)
         {
             ppSystem.PopUp(_failPrompt);
         }
-
-
-        hasInteracted = true;
-
     }
+
+    // Check if door collides with doorblocker
     void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("DoorBlocker"))
         {
             _audioSource.Stop();
 
-            if (playerObject != null)
-            {
-                ppSystem.PopUp(_failPrompt);
-            }
+            animator.speed = 0f;
+            isBlocked = true;
+            // Reset hasInteracted flag when the door gets blocked
             hasInteracted = false;
-            // Pause the animation by setting the speed to 0
-            if (!isAnimationPaused)
-            {
-                animator.speed = 0f;
-                isAnimationPaused = true;
 
-                animator.SetBool(animationBool, false);
+            ppSystem.PopUp(_failPrompt);
 
-            }
-            
         }
-
     }
 
+    // Check if doorblocker is removed
     void OnTriggerExit(Collider other)
     {
         if (other.CompareTag("DoorBlocker"))
         {
-
-            if (isAnimationPaused)
-            {
-                _audioSource.Play();
-                animator.speed = 1f;
-                isAnimationPaused = false;
-            }
+            isBlocked = false;
         }
     }
+
     private void PlaySound()
     {
         _audioSource.clip = _audioClip;
@@ -118,7 +105,7 @@ public class InteractableItem : MonoBehaviour, InteractableItemBase
 
         _deathCamera.gameObject.SetActive(true);
 
-        currentCamera.enabled= false;
+        currentCamera.enabled = false;
 
         if (playerObject != null)
         {
