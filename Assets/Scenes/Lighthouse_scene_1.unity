@@ -5137,7 +5137,7 @@ GameObject:
   - component: {fileID: 183568778}
   - component: {fileID: 183568777}
   m_Layer: 6
-  m_Name: paper (1)
+  m_Name: clueonepaper
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5154,8 +5154,7 @@ Transform:
   m_LocalPosition: {x: -0.23, y: 0.052578803, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 1089835580}
+  m_Children: []
   m_Father: {fileID: 1749451295}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 180}
@@ -7106,7 +7105,7 @@ GameObject:
   - component: {fileID: 258787293}
   - component: {fileID: 258787292}
   m_Layer: 6
-  m_Name: paper (1)
+  m_Name: cluetwopaper
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7123,8 +7122,7 @@ Transform:
   m_LocalPosition: {x: -0.23, y: 0.052578803, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 1723828879}
+  m_Children: []
   m_Father: {fileID: 280295143}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 180}
@@ -7190,7 +7188,7 @@ GameObject:
   - component: {fileID: 263238325}
   - component: {fileID: 263238324}
   m_Layer: 6
-  m_Name: paper
+  m_Name: cluetwopaper1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -14778,7 +14776,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: ba1ee4fe52fff4c4b8376700470e6f68, type: 2}
+  - {fileID: 2100000, guid: e47a1b92705ce034cba4f88a6fdfecd2, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -25911,37 +25909,6 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: -2432090755550338912, guid: da488fc1a7286064380d71a7cbd36f23, type: 3}
---- !u!1 &1089835579
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1089835580}
-  m_Layer: 6
-  m_Name: GameObject
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1089835580
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1089835579}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 183568775}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1090435064
 GameObject:
   m_ObjectHideFlags: 0
@@ -28267,37 +28234,6 @@ Transform:
   m_Father: {fileID: 678291500}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: -3.28, y: 122.361, z: 29.338}
---- !u!1 &1160145775
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1160145776}
-  m_Layer: 6
-  m_Name: GameObject
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1160145776
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1160145775}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1679930220}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1164703201
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -29546,7 +29482,7 @@ GameObject:
   - component: {fileID: 1212391611}
   - component: {fileID: 1212391610}
   m_Layer: 6
-  m_Name: paper
+  m_Name: clueonepaper1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -32915,7 +32851,7 @@ GameObject:
   - component: {fileID: 1322897601}
   - component: {fileID: 1322897600}
   m_Layer: 6
-  m_Name: paper
+  m_Name: cluethree1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -37422,7 +37358,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: ba1ee4fe52fff4c4b8376700470e6f68, type: 2}
+  - {fileID: 2100000, guid: e47a1b92705ce034cba4f88a6fdfecd2, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -41186,7 +41122,7 @@ GameObject:
   - component: {fileID: 1679930223}
   - component: {fileID: 1679930222}
   m_Layer: 6
-  m_Name: paper (1)
+  m_Name: cluethree
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -41203,8 +41139,7 @@ Transform:
   m_LocalPosition: {x: -0.23, y: 0.052578803, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 1160145776}
+  m_Children: []
   m_Father: {fileID: 1171483681}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 180}
@@ -42407,37 +42342,6 @@ MonoBehaviour:
   _uiPanel: {fileID: 709681611}
   _promptText: {fileID: 185731458}
   IsDisplayed: 0
---- !u!1 &1723828878
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1723828879}
-  m_Layer: 6
-  m_Name: GameObject
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1723828879
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1723828878}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 258787290}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1724225443
 PrefabInstance:
   m_ObjectHideFlags: 0
