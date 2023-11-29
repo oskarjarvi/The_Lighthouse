@@ -54,9 +54,17 @@ public class InteractableItem : MonoBehaviour, InteractableItemBase
         // If the door hasn't collided with anything, do this
         if (!isBlocked)
         {
-            _audioSource.Play();
-            animator.speed = 1f;
-            animator.SetBool(animationBool, true);
+            if(_audioSource != null)
+            {
+                _audioSource.Play();
+
+            }
+            if(animator != null)
+            {
+                animator.speed = 1f;
+                animator.SetBool(animationBool, true);
+            }
+            
         }
         // If the door has collided with things and haven't gone into this statement before
         else if (isBlocked)
@@ -70,7 +78,11 @@ public class InteractableItem : MonoBehaviour, InteractableItemBase
     {
         if (other.CompareTag("DoorBlocker"))
         {
-            _audioSource.Stop();
+            if(_audioSource != null)
+            {
+                _audioSource.Stop();
+
+            }
 
             animator.speed = 0f;
             isBlocked = true;
